@@ -12,10 +12,20 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <GL/glut.h>
+#include "utils.h"
+
 class Shape {
 
 public:
+	Shape(Color color_){
+		setColor(color_);
+	}
 	virtual void Draw() = 0;
+
+	void setColor(Color color_) { this->color = color_;};
+protected:
+	Color color;
 };
 
 

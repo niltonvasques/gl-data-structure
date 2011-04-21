@@ -13,17 +13,23 @@
 #include <stdlib.h>
 #include "TriangleShape.h"
 
-TriangleShape::TriangleShape(Point x_,unsigned int width, unsigned int height, Color color){
-	this->a = x_;
-	this->b.x = x_.x + width / 2 ;
-	this->b.y = (x_.y + height);
-	this->c.x = (x_.x + width);
-	this->c.y = x_.y;
+TriangleShape::TriangleShape(Point x_,unsigned int width_, unsigned int height_, Color color) : Shape(color){
+	this->width = width_;
+	this->height = height_;
+	setPoint(x_);
 	this->color = color;
 }
 
 TriangleShape::~TriangleShape(){
 
+}
+
+void TriangleShape::setPoint(Point point){
+	this->a = point;
+	this->b.x = point.x + this->width / 2 ;
+	this->b.y = (point.y + this->height);
+	this->c.x = (point.x + this->width);
+	this->c.y = point.y;
 }
 
 void TriangleShape::Draw(){

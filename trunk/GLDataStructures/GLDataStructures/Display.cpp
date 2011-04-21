@@ -20,7 +20,7 @@
 #define INIT_Y 50
 
 #define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#define WINDOW_HEIGHT 640
 
 
 using namespace std;
@@ -76,6 +76,7 @@ void CDisplay::initialize(){
 	glutCreateWindow(WINDOW_TITLE);
 	glutDisplayFunc(dispatchDraw);
 	//glutIdleFunc(dispatchDraw);
+	glMatrixMode(GL_PROJECTION);
 	glutReshapeFunc(resizeWindow);
 }
 
