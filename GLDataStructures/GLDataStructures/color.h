@@ -16,7 +16,7 @@ class Color{
 	
 public:
 	Color(){Color(255, 255, 255);}
-	Color(unsigned char red_, unsigned char green_, unsigned char blue_, unsigned char alpha_ = 255) :
+	Color(GLubyte red_, GLubyte green_, GLubyte blue_, GLubyte alpha_ = 255) :
 	  red(red_),
 	  green(green_),
 	  blue(blue_),
@@ -25,10 +25,10 @@ public:
 
 	~Color(){}
 
-	unsigned char red;
-	unsigned char green;
-	unsigned char blue;
-	unsigned char alpha;
+	GLubyte red;
+	GLubyte green;
+	GLubyte blue;
+	GLubyte alpha;
 };
 
 #endif

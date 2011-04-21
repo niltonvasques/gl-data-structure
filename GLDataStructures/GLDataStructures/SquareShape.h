@@ -32,7 +32,6 @@ public:
 private:
 	virtual void Draw();
 	Point a,b,c,d;
-	//Color color;
 
 };
 #endif /*Fim da classe de desenho de formas */

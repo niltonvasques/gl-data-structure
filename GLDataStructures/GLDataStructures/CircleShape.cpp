@@ -27,7 +27,7 @@ void CircleShape::Draw(){
 	float angle,x,y,x1,y1,x2,y2;
 	glBegin(GL_LINE_LOOP);
 	for (i=0; i < circle_points; i++)   {   
-		glColor3f(1.0f, 0.0f, 0.0f);
+		glColor4ub(this->color.red, this->color.green, this->color.blue,this->color.alpha);
 		angle =  2 *( M_PI * i / circle_points);
 		x = (cos(angle));
 		y = (sin(angle));
