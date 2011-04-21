@@ -179,10 +179,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Shape.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\TriangleShape.cpp"
 				>
 			</File>

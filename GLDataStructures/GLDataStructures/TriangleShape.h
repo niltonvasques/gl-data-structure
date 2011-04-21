@@ -14,6 +14,7 @@
 
 #include <GL/glut.h>
 #include "Shape.h"
+#include "color.h"
 #include "Point.h"
 
 class TriangleShape :
@@ -21,13 +22,13 @@ class TriangleShape :
 {
 
 public:
-	TriangleShape(void);
-	TriangleShape(Point x_,Point y_,Point z_);
+	TriangleShape(Point x_,Point y_,Point z_, Color color = Color(255, 0, 0));
 	virtual ~TriangleShape(void);
 
 private:
-	virtual void GlutDraw();
+	virtual void Draw();
 	Point a,b,c;
+	Color color;
 
 };
 #endif /*Fim da classe de desenho de formas */
