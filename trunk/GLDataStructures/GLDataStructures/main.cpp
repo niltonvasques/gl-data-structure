@@ -4,6 +4,7 @@
 #include "keycodes.h"
 #include "Display.h"
 #include "TriangleShape.h"
+#include "SquareShape.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ int main(int argc, const char* argv[]){
 
 void keyboardListener(unsigned char key, int x, int y){
 	TriangleShape *triangle = NULL;
+	SquareShape *square = NULL;
 	switch(key){
 		case KEY_ESCAPE:
 			exit(0);
@@ -35,12 +37,11 @@ void keyboardListener(unsigned char key, int x, int y){
 		
 		case KEY_KEY_2:
 			//Exemplo da adição de um shape a tela
-			triangle = new TriangleShape(Point(50,30),10,50, Color(0, 255, 0));
-			lastTriangle = triangle;
-			CDisplay::getInstance()->addShape(triangle);
+			square = new SquareShape(Point(10,30),10,50, Color(0, 255, 0));
+			//lastTriangle = triangle;
+			CDisplay::getInstance()->addShape(square);
 			CDisplay::getInstance()->redraw();			
 			break;		
-
 		case KEY_KEY_3:
 			//Exemplo da remoção de um shape da tela
 			delete(CDisplay::getInstance()->removeShapeN(lastTriangle));
