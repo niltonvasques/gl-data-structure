@@ -22,7 +22,7 @@ class TriangleShape :
 {
 
 public:
-	TriangleShape(Point x_,unsigned int width, unsigned int height , Color color = Color(255, 0, 0));
+	TriangleShape(Point x_,GLuint width, GLuint height , Color color = Color(255, 0, 0));
 	virtual ~TriangleShape(void);
 
 	void setPoint(Point point);
@@ -30,9 +30,8 @@ public:
 private:
 	virtual void Draw();
 	Point a,b,c;
-	unsigned int width;
-	unsigned int height;
-	Color color;
+	GLuint width;
+	GLuint height;
 
 };
 #endif /*Fim da classe de desenho de formas */
