@@ -212,7 +212,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\TriangleShape.h"
+					RelativePath=".\SquareShape.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TriangleShape .h"
 					>
 				</File>
 			</Filter>
