@@ -75,6 +75,6 @@ void CDisplay::addShape(Shape* shape){
 	shapes[shape] = shape;
 }
 
-void CDisplay::reDraw(){
+void CDisplay::redraw(){
 	CDisplay::dispatchDraw();
 }
