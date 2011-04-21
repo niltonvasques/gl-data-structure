@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include "keycodes.h"
+#include "Display.h"
 #include "TriangleShape.h"
 
 void keyPressedListener(unsigned char key, int x, int y);
@@ -15,62 +16,33 @@ void inicializa();
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
-void menu(int i){
-	printf("La vai");
-	glutPostRedisplay();
-}
+void keyboardListener(unsigned char key, int x, int y);
 
 int main(int argc, const char* argv[]){
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowPosition(INIT_X,INIT_Y);
-	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
-	glutCreateWindow(WINDOW_TITLE);
-
-	TriangleShape triangle = TriangleShape(Point(-60,-49),Point(0,49),Point(60,-49));
-	triangle.Draw();
-	
-	glutKeyboardFunc(keyPressedListener);
-	glutReshapeFunc(resizeWindow);
-	glutMainLoop();
-
+	CDisplay::getInstance()->initialize();
+	CDisplay::getInstance()->setKeyboardFunc(keyboardListener);
+	CDisplay::getInstance()->run();
 	return 0;
 }
 
-void keyPressedListener(unsigned char key, int x, int y){
-	printf("keyPressedListener Key %d\n",key);
+void keyboardListener(unsigned char key, int x, int y){
 	switch(key){
 		case KEY_ESCAPE:
 			exit(0);
 			break;
-		case KEY_KEY_1:
-			printf("pressed\n");
-			glutSwapBuffers();			
+		case KEY_KEY_1:{
+			TriangleShape *triangle = new TriangleShape(Point(-30,-49),Point(0,49),Point(30,-49), Color(255, 0, 0));
+			CDisplay::getInstance()->addShape(triangle);
+			CDisplay::getInstance()->redraw();
 			break;
-		case KEY_KEY_2:
-			TriangleShape(Point(-30,-49),Point(0,49),Point(30,-49)).Draw();
+		}
+		case KEY_KEY_2:{
+
+			TriangleShape *triangle2 = new TriangleShape(Point(-30,-49),Point(-10,0),Point(-20,-49), Color(0, 255, 0));
+			CDisplay::getInstance()->addShape(triangle2);
+			CDisplay::getInstance()->redraw();
 			break;
-		case KEY_KEY_3:
-			TriangleShape(Point(-30,-49),Point(0,29),Point(30,-49)).Draw();
-			break;
+		}
 	}
 }
 
-void resizeWindow(GLsizei w, GLsizei h)
-{
-	// Evita a divisao por zero
-	if(h == 0) h = 1;
-                           
-	// Especifica as dimensões da Viewport
-	glViewport(0, 0, w, h);
-
-	// Inicializa o sistema de coordenadas
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	// Estabelece a janela de seleção (esquerda, direita, inferior, 
-	// superior) mantendo a proporção com a janela de visualização
-	if (w <= h) 
-		gluOrtho2D (-50.0f, 50.0f, -50.0f*h/w, 50.0f*h/w);
-	else 
-		gluOrtho2D (-50.0f*w/h, 50.0f*w/h, -50.0f, 50.0f);
-}
