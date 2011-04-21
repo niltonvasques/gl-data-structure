@@ -182,6 +182,10 @@
 				Name="Shapes"
 				>
 				<File
+					RelativePath=".\CircleShape.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\SquareShape.cpp"
 					>
 				</File>
@@ -208,19 +212,27 @@
 				RelativePath=".\Display.h"
 				>
 			</File>
-			<File
-				RelativePath=".\TriangleShape.h"
-				>
-			</File>
 			<Filter
 				Name="Shapes"
 				>
+				<File
+					RelativePath=".\CircleShape.h"
+					>
+				</File>
 				<File
 					RelativePath=".\Shape.h"
 					>
 				</File>
 				<File
+					RelativePath=".\shapes.h"
+					>
+				</File>
+				<File
 					RelativePath=".\SquareShape.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TriangleShape.h"
 					>
 				</File>
 			</Filter>
@@ -229,6 +241,10 @@
 				>
 				<File
 					RelativePath=".\color.h"
+					>
+				</File>
+				<File
+					RelativePath=".\constants.h"
 					>
 				</File>
 				<File
@@ -241,6 +257,10 @@
 				</File>
 				<File
 					RelativePath=".\rect.h"
+					>
+				</File>
+				<File
+					RelativePath=".\utils.h"
 					>
 				</File>
 			</Filter>

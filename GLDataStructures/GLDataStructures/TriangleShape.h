@@ -25,9 +25,13 @@ public:
 	TriangleShape(Point x_,unsigned int width, unsigned int height , Color color = Color(255, 0, 0));
 	virtual ~TriangleShape(void);
 
+	void setPoint(Point point);
+
 private:
 	virtual void Draw();
 	Point a,b,c;
+	unsigned int width;
+	unsigned int height;
 	Color color;
 
 };

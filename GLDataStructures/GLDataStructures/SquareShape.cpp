@@ -1,25 +1,28 @@
 #include <stdio.h>
 #include "SquareShape.h"
 
-SquareShape::SquareShape(Point x_,unsigned int width, unsigned int height, Color color){
-	this->a.x = x_.x;
-	this->a.y = x_.y + height;
-	this->b.x = x_.x;
-	this->b.y = x_.y;
-	this->c.x = x_.x + width;
-	this->c.y = x_.y;
-	this->d.x = x_.x + width;
-	this->d.y = x_.y + height;
-	this->color = color;
+SquareShape::SquareShape(Point x_,unsigned int width, unsigned int height, Color color) : Shape(color){
+	setRect(Rect(x_.x,x_.y,width,height));
 }
 
-SquareShape::SquareShape(Rect rect , Color color){
-	SquareShape(Point(rect.x,rect.y),rect.width,rect.height,color);
+SquareShape::SquareShape(Rect rect , Color color) : Shape(color){
+	setRect(rect);
 }
 
 
 SquareShape::~SquareShape(){
 
+}
+
+void SquareShape::setRect(Rect rect){
+	this->a.x = rect.x;
+	this->a.y = rect.y + rect.height;
+	this->b.x = rect.x;
+	this->b.y = rect.y;
+	this->c.x = rect.x + rect.width;
+	this->c.y = rect.y;
+	this->d.x = rect.x + rect.width;
+	this->d.y = rect.y + rect.height;
 }
 
 void SquareShape::Draw(){

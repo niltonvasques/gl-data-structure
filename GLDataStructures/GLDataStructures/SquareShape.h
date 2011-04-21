@@ -27,10 +27,12 @@ public:
 	SquareShape(Rect rect , Color color = Color(255, 0, 0));
 	virtual ~SquareShape(void);
 
+	void setRect(Rect rect);
+
 private:
 	virtual void Draw();
 	Point a,b,c,d;
-	Color color;
+	//Color color;
 
 };
 #endif /*Fim da classe de desenho de formas */
