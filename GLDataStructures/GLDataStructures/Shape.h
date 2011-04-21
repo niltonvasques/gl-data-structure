@@ -11,19 +11,12 @@
 -----------------------------------------------------------------------------*/
 #ifndef SHAPE_H
 #define SHAPE_H
-#include <GL/glut.h>
 
 class Shape {
 
 public:
-	void Draw(void);	
-
-private:
-	virtual void GlutDraw() = 0;
-	static void drawShape();
-	static void registerDisplayFunc(Shape *p);
-	static Shape *shape;
-	static bool functionRegisted;
+	virtual void Draw() = 0;
 };
+
 
 #endif
