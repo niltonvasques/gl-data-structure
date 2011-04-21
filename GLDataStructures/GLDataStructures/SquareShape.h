@@ -14,6 +14,7 @@
 
 #include <GL/glut.h>
 #include "Shape.h"
+#include "rect.h"
 #include "color.h"
 #include "Point.h"
 
@@ -23,11 +24,12 @@ class SquareShape :
 
 public:
 	SquareShape(Point x_,unsigned int width, unsigned int height , Color color = Color(255, 0, 0));
+	SquareShape(Rect rect , Color color = Color(255, 0, 0));
 	virtual ~SquareShape(void);
 
 private:
 	virtual void Draw();
-	Point a,b,c;
+	Point a,b,c,d;
 	Color color;
 
 };
