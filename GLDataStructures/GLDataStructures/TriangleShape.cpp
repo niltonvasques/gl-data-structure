@@ -27,8 +27,7 @@ TriangleShape::~TriangleShape(){
 }
 
 void TriangleShape::Draw(){
-	printf("DrawTriangulo a: x %d y %d   b: x %d y %d    c: x %d  y: %d\n",a.x,a.y,b.x,b.y,c.x,c.y);
-	//glClearColor(0,1,0,0);
+	//printf("DrawTriangulo a: x %d y %d   b: x %d y %d    c: x %d  y: %d\n",a.x,a.y,b.x,b.y,c.x,c.y);
 	glColor3ub(color.red,color.green,color.blue);
 	glBegin(GL_TRIANGLES);
 		glVertex2f(a.x,a.y);//Primeiro vertice
