@@ -1,3 +1,14 @@
+/*-----------------------------------------------------------------------------
+  Universidade Católica do Salvador - UCSAL
+  Disciplina - Organização de Arquivos
+  Aluno - Nilton Vasques Carvalho Junior
+  Autores: Nilton Vasques e Gustavo Neves
+  Data do ínicio da implementação: 20/04/2011
+  Data da última modificação: 21/04/2011
+
+  Implementação da classe Display que é responsavel por desenhar na tela.
+  A mesma recebe por parametro um objeto do tipo Shape.
+-----------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/glut.h>
@@ -66,6 +77,10 @@ void CDisplay::initialize(){
 	glutDisplayFunc(dispatchDraw);
 	//glutIdleFunc(dispatchDraw);
 	glutReshapeFunc(resizeWindow);
+}
+
+void CDisplay::setBackgroundColor(Color color){
+	glClearColor(color.red,color.green,color.blue,color.alpha);	
 }
 
 void CDisplay::run(){

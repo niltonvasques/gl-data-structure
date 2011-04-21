@@ -1,3 +1,14 @@
+/*-----------------------------------------------------------------------------
+  Universidade Católica do Salvador - UCSAL
+  Disciplina - Organização de Arquivos
+  Aluno - Nilton Vasques Carvalho Junior
+  Autores: Nilton Vasques
+  Data do ínicio da implementação: 20/04/2011
+  Data da última modificação: 21/04/2011
+
+  Implementação da classe Color que recebe como parametro valores RED, GREEN,
+  BLUE e ALPHA.
+-----------------------------------------------------------------------------*/
 #ifndef COLOR_H
 #define COLOR_H
 
