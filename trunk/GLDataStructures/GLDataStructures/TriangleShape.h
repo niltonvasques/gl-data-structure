@@ -22,7 +22,7 @@ class TriangleShape :
 {
 
 public:
-	TriangleShape(Point x_,Point y_,Point z_, Color color = Color(255, 0, 0));
+	TriangleShape(Point x_,unsigned int width, unsigned int height , Color color = Color(255, 0, 0));
 	virtual ~TriangleShape(void);
 
 private:

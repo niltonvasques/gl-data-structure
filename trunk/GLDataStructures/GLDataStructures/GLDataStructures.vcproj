@@ -178,14 +178,22 @@
 				RelativePath=".\main.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\Point.cpp"
+			<Filter
+				Name="Shapes"
 				>
-			</File>
-			<File
-				RelativePath=".\TriangleShape.cpp"
+				<File
+					RelativePath=".\TriangleShape.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Util"
 				>
-			</File>
+				<File
+					RelativePath=".\Point.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -193,29 +201,37 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\color.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Display.h"
 				>
 			</File>
-			<File
-				RelativePath=".\keycodes.h"
+			<Filter
+				Name="Shapes"
 				>
-			</File>
-			<File
-				RelativePath=".\Point.h"
+				<File
+					RelativePath=".\Shape.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TriangleShape.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Util"
 				>
-			</File>
-			<File
-				RelativePath=".\Shape.h"
-				>
-			</File>
-			<File
-				RelativePath=".\TriangleShape.h"
-				>
-			</File>
+				<File
+					RelativePath=".\color.h"
+					>
+				</File>
+				<File
+					RelativePath=".\keycodes.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Point.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

@@ -16,6 +16,7 @@ using namespace std;
 
 CDisplay *CDisplay::instance = NULL;
 void CDisplay::dispatchDraw(){
+	int x = 0;
 	glClear(GL_COLOR_BUFFER_BIT);
 	std::map<Shape*, Shape*> shapes = CDisplay::getInstance()->shapes;
 	for (map<Shape*, Shape*>::iterator it = shapes.begin(); it != shapes.end(); it++){
@@ -48,13 +49,13 @@ void CDisplay::resizeWindow(GLsizei w, GLsizei h){
 
 	// Estabelece a janela de seleção (esquerda, direita, inferior, 
 	// superior) mantendo a proporção com a janela de visualização
-	if (w <= h) 
-		gluOrtho2D (-50.0f, 50.0f, -50.0f*h/w, 50.0f*h/w);
-	else 
-		gluOrtho2D (-50.0f*w/h, 50.0f*w/h, -50.0f, 50.0f);
+	//if (w <= h) 
+		gluOrtho2D (0.0f, 100.f, 100.f, 0.0f);
+	//else 
+		//gluOrtho2D (-50.0f*w/h, 50.0f*w/h, -50.0f, 50.0f);
 }
 
-void CDisplay::setKeyboardFunc(void (__cdecl *func)(unsigned char, int, int)){
+void CDisplay::setKeyboardFuncCallback(void (__cdecl *func)(unsigned char, int, int)){
 	glutKeyboardFunc(func);
 }
 
@@ -73,6 +74,20 @@ void CDisplay::run(){
 
 void CDisplay::addShape(Shape* shape){
 	shapes[shape] = shape;
+}
+
+Shape* CDisplay::removeShapeN(Shape* shape){
+	if(shape != NULL) shapes.erase(shape);
+	return shape;
+}
+
+std::map<Shape*, Shape*> CDisplay::removeAllShapesN(){
+	std::map<Shape*, Shape*> ret;
+	for (map<Shape*, Shape*>::iterator it = shapes.begin(); it != shapes.end(); it++){
+		ret[it->first] = it->second;
+	}
+	shapes.clear();
+	return ret;
 }
 
 void CDisplay::redraw(){
