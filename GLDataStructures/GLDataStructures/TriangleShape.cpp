@@ -13,10 +13,12 @@
 #include <stdlib.h>
 #include "TriangleShape.h"
 
-TriangleShape::TriangleShape(Point x_, Point y_, Point z_, Color color){
+TriangleShape::TriangleShape(Point x_,unsigned int width, unsigned int height, Color color){
 	this->a = x_;
-	this->b = y_;
-	this->c = z_;
+	this->b.x = x_.x + width / 2 ;
+	this->b.y = (x_.y + height);
+	this->c.x = (x_.x + width);
+	this->c.y = x_.y;
 	this->color = color;
 }
 
@@ -25,7 +27,7 @@ TriangleShape::~TriangleShape(){
 }
 
 void TriangleShape::Draw(){
-	printf("DrawTriangulo\n");
+	printf("DrawTriangulo a: x %d y %d   b: x %d y %d    c: x %d  y: %d\n",a.x,a.y,b.x,b.y,c.x,c.y);
 	//glClearColor(0,1,0,0);
 	glColor3ub(color.red,color.green,color.blue);
 	glBegin(GL_TRIANGLES);

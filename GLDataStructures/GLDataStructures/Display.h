@@ -11,8 +11,10 @@ public:
 	static CDisplay* getInstance();
 
 	void initialize();
-	void setKeyboardFunc(void (__cdecl *func)(unsigned char, int, int));
+	void setKeyboardFuncCallback(void (__cdecl *func)(unsigned char, int, int));
 	void addShape(Shape* shape);
+	Shape* removeShapeN(Shape* shape);
+	std::map<Shape*, Shape*> CDisplay::removeAllShapesN();
 	void redraw();
 	void run();
 
