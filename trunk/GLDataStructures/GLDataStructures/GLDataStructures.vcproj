@@ -186,7 +186,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\LineShape.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\SquareShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TestShape.cpp"
 					>
 				</File>
 				<File
@@ -220,6 +228,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\LineShape.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Shape.h"
 					>
 				</File>
@@ -229,6 +241,10 @@
 				</File>
 				<File
 					RelativePath=".\SquareShape.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TestShape.h"
 					>
 				</File>
 				<File

@@ -71,13 +71,14 @@ void CDisplay::setKeyboardFuncCallback(void (__cdecl *func)(unsigned char, int, 
 }
 
 void CDisplay::initialize(){
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 	glutCreateWindow(WINDOW_TITLE);
 	glutDisplayFunc(dispatchDraw);
 	//glutIdleFunc(dispatchDraw);
 	glMatrixMode(GL_PROJECTION);
 	glutReshapeFunc(resizeWindow);
+	//glutFullScreen();
 }
 
 void CDisplay::setBackgroundColor(Color color){
