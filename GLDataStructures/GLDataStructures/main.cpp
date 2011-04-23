@@ -10,7 +10,7 @@ using namespace std;
 void keyboardListener(unsigned char key, int x, int y);
 
 int main(int argc, const char* argv[]){
-	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela
+	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
 	CDisplay::getInstance()->setKeyboardFuncCallback(keyboardListener);//Função que registra a função que será o callback das entradas de teclado
 	CDisplay::getInstance()->setBackgroundColor(Color());//Seta a cor de fund
 	CDisplay::getInstance()->run();//Inicia o main loop da gl...
