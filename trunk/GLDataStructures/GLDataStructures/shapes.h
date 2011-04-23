@@ -6,5 +6,6 @@
 #include "CircleShape.h"
 #include "TestShape.h"
 #include "LineShape.h"
+#include "PointShape.h"
 
 #endif
