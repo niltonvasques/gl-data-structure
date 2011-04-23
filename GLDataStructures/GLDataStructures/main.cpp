@@ -5,9 +5,12 @@
 #include "Display.h"
 #include "shapes.h"
 
+
 using namespace std;
 
 void keyboardListener(unsigned char key, int x, int y);
+void drawAnimationPointer();
+void deleteShapesDisplay();
 
 int main(int argc, const char* argv[]){
 	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
@@ -25,37 +28,25 @@ void keyboardListener(unsigned char key, int x, int y){
 			break;
 		case KEY_KEY_1:
 			//Exemplo da adição de um shape a tela
-			shape = new CircleShape(Point(50,50),30,Color(0,0,255));
+			shape = new CircleShape(Point(0,0),30,Color(0,0,255));
 			CDisplay::getInstance()->addShape(shape);
-			//test = new TestShape();
-			//CDisplay::getInstance()->addShape(test);
 			CDisplay::getInstance()->redraw();
 			break;
 		
 		case KEY_KEY_2:
 			//Exemplo da adição de um shape a tela
-			shape = new SquareShape(Rect(10,20,20,20), Color(0, 255, 0));
+			//shape = new SquareShape(Rect(10,20,20,20), Color(0, 255, 0));
+			shape = new TestShape();
 			CDisplay::getInstance()->addShape(shape);
 			CDisplay::getInstance()->redraw();			
 			break;		
 		case KEY_KEY_3:
 			//Exemplo da adição de um shape a tela
-			//for(int i = 0; i < 1; i++){
-				shape = new LineShape(Point(10,50),Point(70,90));
-				CDisplay::getInstance()->addShape(shape);
-			//}
-			printf("fim\n");
-			CDisplay::getInstance()->redraw();
+			drawAnimationPointer();
 			break;
 		case KEY_KEY_4:{
 			//Exemplo da remoção de todos os shapes da tela
-			std::map<Shape*,Shape*> shapes = CDisplay::getInstance()->removeAllShapesN();{int i = 0;
-			for(std::map<Shape*,Shape*>::iterator it = shapes.begin(); it != shapes.end() ; it++ ,i++){
-				printf("deletandooo....%d\n",i);
-				delete(it->second);
-			}
-			}
-			CDisplay::getInstance()->redraw();
+			deleteShapesDisplay();
 			break;
 		}
 		case KEY_KEY_5:
@@ -64,4 +55,32 @@ void keyboardListener(unsigned char key, int x, int y){
 			CDisplay::getInstance()->redraw();
 			break;
 	}
+}
+
+
+void drawAnimationPointer(){
+	Shape *shape = new LineShape(Point(0,0),Point(-100,0));
+	CDisplay::getInstance()->addShape(shape);
+	//for(;;){
+		for(int x = -100, y = 0; y != -1 || x != -100; ){
+			if( x == 100 && y > -100) y--;
+			else if(x == -100 && y < 100) y++;
+			else if( y == 100 && x < 100) x++;
+			else if(y == -100 && x > -100) x--;
+			((LineShape*)shape)->setPoint(Point(0,0),Point(x,y));
+			CDisplay::getInstance()->redraw();
+			sleep(2);
+		}
+	//}
+	delete(CDisplay::getInstance()->removeShapeN(shape));
+}
+
+void deleteShapesDisplay(){
+	std::map<Shape*,Shape*> shapes = CDisplay::getInstance()->removeAllShapesN();
+	int i = 0;
+	for(std::map<Shape*,Shape*>::iterator it = shapes.begin(); it != shapes.end() ; it++ ,i++){
+		printf("deletandooo....%d\n",i);
+		delete(it->second);
+	}
+	CDisplay::getInstance()->redraw();
 }

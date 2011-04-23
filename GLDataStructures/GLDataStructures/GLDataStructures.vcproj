@@ -209,6 +209,10 @@
 					RelativePath=".\Point.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\time_utils.c"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -273,6 +277,10 @@
 				</File>
 				<File
 					RelativePath=".\rect.h"
+					>
+				</File>
+				<File
+					RelativePath=".\time_utils.h"
 					>
 				</File>
 				<File

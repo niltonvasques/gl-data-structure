@@ -6,5 +6,6 @@
 #include "keycodes.h"
 #include "color.h"
 #include "constants.h"
+#include "time_utils.h"
 
 #endif
