@@ -113,3 +113,10 @@ std::map<Shape*, Shape*> CDisplay::removeAllShapesN(){
 void CDisplay::redraw(){
 	CDisplay::dispatchDraw();
 }
+
+void CDisplay::enableAntiAlias(){
+	if(glIsEnabled(GL_LINE_SMOOTH))
+		glDisable(GL_LINE_SMOOTH);
+	else
+		glEnable(GL_LINE_SMOOTH);
+}

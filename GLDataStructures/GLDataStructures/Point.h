@@ -12,6 +12,8 @@
 #ifndef POINT_H
 #define POINT_H
 
+#include <GL/glut.h>
+
 class Point{
 	
 public:
@@ -19,8 +21,9 @@ public:
 	Point(int x_, int y_);
 	virtual ~Point(void);
 
-	int x;
-	int y;
+	GLint vet[2];
+	GLint x;
+	GLint y;
 };
 
 #endif

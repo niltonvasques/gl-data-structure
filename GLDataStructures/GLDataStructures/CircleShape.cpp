@@ -23,24 +23,16 @@ void CircleShape::setRadius(GLuint radius_){
 
 void CircleShape::Draw(){
 	//Alterar o metodo de coordenadas da tela pois o circulo fica oval em janelas que nao sao quadrado perfeito
-	int t,i, circle_points = 100;
-	float angle,x,y,x1,y1,x2,y2;
+	int circle_points = 50;
+	glColor4ub(this->color.red, this->color.green, this->color.blue,this->color.alpha);
 	glBegin(GL_LINE_LOOP);
-	for (i=0; i < circle_points; i++)   {   
-		glColor4ub(this->color.red, this->color.green, this->color.blue,this->color.alpha);
-		angle =  2 *( M_PI * i / circle_points);
-		x = (cos(angle));
-		y = (sin(angle));
+	for (float angle = 0; angle < 2 *M_PI; angle +=( M_PI/circle_points)){   
+		float x = (cos(angle));
+		float y = (sin(angle));
 		glVertex2f ( x*this->radius+this->center.x, y*this->radius+this->center.y );
-
-		if ( i == 32 ) {
-			x1 = x;
-			y1 = y;
-		}
 	}
 	glEnd();
-}
-	
+}	
 	//Algoritmo de desenho de cones estranhos
 	//int t,i, circle_points = 100;
 	//float angle,x,y,x1,y1,x2,y2;

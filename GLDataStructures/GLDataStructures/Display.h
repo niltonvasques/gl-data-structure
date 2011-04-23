@@ -28,6 +28,7 @@ public:
 	std::map<Shape*, Shape*> CDisplay::removeAllShapesN();
 	void setBackgroundColor(Color color);
 	void redraw();
+	void enableAntiAlias();
 	void run();
 
 private:
