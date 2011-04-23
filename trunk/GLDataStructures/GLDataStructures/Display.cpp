@@ -47,6 +47,7 @@ CDisplay::CDisplay(){
 CDisplay::~CDisplay(){
 }
 
+#define QUADRANT_SIZE 100.0f
 void CDisplay::resizeWindow(GLsizei w, GLsizei h){
 	// Evita a divisao por zero
 	if(h == 0) h = 1;
@@ -60,10 +61,12 @@ void CDisplay::resizeWindow(GLsizei w, GLsizei h){
 
 	// Estabelece a janela de seleção (esquerda, direita, inferior, 
 	// superior) mantendo a proporção com a janela de visualização
-	//if (w <= h) 
-		gluOrtho2D (0.0f, 100.f, 100.f, 0.0f);
-	//else 
-		//gluOrtho2D (-50.0f*w/h, 50.0f*w/h, -50.0f, 50.0f);
+	GLdouble left = ( w <= h ? -QUADRANT_SIZE : -QUADRANT_SIZE * w/h);
+	GLdouble right = ( w <= h ? QUADRANT_SIZE : QUADRANT_SIZE * w/h);
+	GLdouble bottom = ( w <= h ? -QUADRANT_SIZE * h/w : -QUADRANT_SIZE);
+	GLdouble top = ( w <= h ? QUADRANT_SIZE * h/w : QUADRANT_SIZE);
+	printf("left %f right %f bottom %f bottom %f \n",left,right,bottom,top);
+	gluOrtho2D (left, right, bottom, top);
 }
 
 void CDisplay::setKeyboardFuncCallback(void (__cdecl *func)(unsigned char, int, int)){
