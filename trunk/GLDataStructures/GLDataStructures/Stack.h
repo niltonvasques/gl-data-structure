@@ -64,11 +64,9 @@ int Stack<Type>::pop(Type &t){
 template <class Type>
 int Stack<Type>::pick(Type &t){
 	if(stackPtr != NULL){
-		printf("Pick sucess\n");
 		t = stackPtr->content;
 		return 1;
 	}
-	printf("Pick failed\n");
 	return 0;
 }
 

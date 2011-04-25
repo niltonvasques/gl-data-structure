@@ -3,11 +3,15 @@
 StackDraw::StackDraw(){
 	this->blockWidth = DEFAULT_BLOCK_WIDTH;
 	this->blockHeight = DEFAULT_BLOCK_HEIGHT;
+	this->originalBlockWidth = this->blockWidth;
+	this->originalBlockHeight = this->blockHeight;
 }
 
 StackDraw::StackDraw(GLuint blockWidth_, GLuint blockHeight_) {
 	this->blockWidth = blockWidth_;
 	this->blockHeight = blockHeight_;
+	this->originalBlockWidth = this->blockWidth;
+	this->originalBlockHeight = this->blockHeight;
 }
 
 //StackDraw::StackDraw(Stack<GLuint> *stack_){
@@ -34,10 +38,7 @@ int StackDraw::push(GLuint content_){
 		Rect rect = pick->getRect();
 		squareContent = new SquareShape(Rect(rect.x,rect.y+rect.height+1,this->blockWidth,this->blockHeight));
 		this->squareStack.push(squareContent);
-		if((rect.y + (int)this->blockHeight) > (QUADRANT_SIZE - this->blockHeight)){
-			printf(" rect y  %d blockHeight %d\n rect.y+height %d",rect.y,this->blockHeight,(rect.y + this->blockHeight));
-			resizeBlocksStack();
-		}
+		calcBetterBlockSize(rect,PUSH);
 	}
 	CDisplay::getInstance()->addShape(squareContent);
 	CDisplay::getInstance()->redraw();
@@ -48,19 +49,54 @@ SquareShape *StackDraw::pop(GLuint &value){
 	this->stack.pop(value);
 	SquareShape *square = NULL;
 	this->squareStack.pop(square);
+	SquareShape *pick = NULL;
+	this->squareStack.pick(pick);
+	if(pick != NULL){
+		calcBetterBlockSize(pick->getRect(),POP);
+	}
+	CDisplay::getInstance()->redraw();
 	return square;
 }
-#define MIN_BLOCK_WIDTH  4
-#define MIN_BLOCK_HEIGHT 2
+
 #define RATIO_REDUCE_SIZE 8
+
+void StackDraw::calcBetterBlockSize(Rect rectTopStack,MODE m){
+	const GLfloat LIMIAR = ((GLfloat) originalBlockHeight / originalBlockWidth );
+	const GLuint MIN_BLOCK_WIDTH = 6;
+	const GLuint MIN_BLOCK_HEIGHT = (LIMIAR * (GLfloat) MIN_BLOCK_WIDTH) ; 
+	GLuint ratioHeight = ((GLfloat)blockHeight/RATIO_REDUCE_SIZE < 2 ? 2 : (GLfloat)blockHeight/RATIO_REDUCE_SIZE);
+	GLuint ratioWidth = ((GLfloat)blockWidth/RATIO_REDUCE_SIZE < 2 ? 2 : (GLfloat)blockWidth/RATIO_REDUCE_SIZE);
+	if(m == PUSH){
+		if((rectTopStack.y + (int)this->blockHeight) > (QUADRANT_SIZE - this->blockHeight)){
+			if(blockHeight == MIN_BLOCK_HEIGHT || blockWidth == MIN_BLOCK_WIDTH) return;
+			if( (blockHeight-ratioHeight) > MIN_BLOCK_HEIGHT && (blockWidth-ratioWidth) > MIN_BLOCK_WIDTH){
+				blockWidth	= (blockWidth  - ratioWidth);
+				blockHeight = (LIMIAR * (GLfloat)blockWidth); 				
+			}else{
+				blockWidth	= MIN_BLOCK_WIDTH;
+				blockHeight = MIN_BLOCK_HEIGHT; 				
+			}			
+			resizeBlocksStack();
+		}
+	}
+	if(m == POP){
+		if(rectTopStack.y <= (QUADRANT_SIZE/2) ){
+			if(blockHeight == originalBlockHeight || blockWidth == originalBlockWidth) return;
+			if( (blockHeight + ratioHeight) < originalBlockHeight && (blockWidth+ratioWidth) < originalBlockWidth){
+				blockWidth	= (blockWidth + ratioWidth);
+				blockHeight = (LIMIAR * (GLfloat)blockWidth); 				
+			}else{
+				blockWidth	= originalBlockWidth;
+				blockHeight = originalBlockHeight; 				
+			}
+			resizeBlocksStack();
+		}
+	}
+}
+	
+
 void StackDraw::resizeBlocksStack(){
-	if(blockHeight == MIN_BLOCK_HEIGHT || blockWidth == MIN_BLOCK_WIDTH) return;
-	GLuint oldHeight = this->blockHeight;
-	GLuint oldWidth = this->blockWidth;
-	this->blockHeight -= ((GLfloat)blockHeight/RATIO_REDUCE_SIZE > MIN_BLOCK_HEIGHT ?
-		(GLfloat)blockHeight/RATIO_REDUCE_SIZE  :	MIN_BLOCK_HEIGHT); 
-	this->blockWidth -= ((GLfloat)blockWidth/RATIO_REDUCE_SIZE > MIN_BLOCK_WIDTH ? 
-		(GLfloat)blockWidth/RATIO_REDUCE_SIZE	:	MIN_BLOCK_WIDTH);
+	printf("blockWidth %d blockHeight %d\n",blockWidth,blockHeight);
 	Stack<SquareShape*> stackSqr;
 	while(!this->squareStack.isEmpty()){
 		SquareShape *sqr = NULL;
