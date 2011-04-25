@@ -24,5 +24,6 @@ private:
 	Stack<GLuint> stack;
 	GLuint blockWidth;
 	GLuint blockHeight;
+	void resizeBlocksStack();
 };
 #endif
