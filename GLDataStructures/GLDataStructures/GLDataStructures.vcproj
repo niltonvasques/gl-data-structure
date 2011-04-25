@@ -198,6 +198,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\StringShape.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\TestShape.cpp"
 					>
 				</File>
@@ -265,6 +269,10 @@
 				</File>
 				<File
 					RelativePath=".\SquareShape.h"
+					>
+				</File>
+				<File
+					RelativePath=".\StringShape.h"
 					>
 				</File>
 				<File
