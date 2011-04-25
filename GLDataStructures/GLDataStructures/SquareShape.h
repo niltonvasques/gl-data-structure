@@ -26,12 +26,15 @@ public:
 	SquareShape(Point x_,unsigned int width, unsigned int height , Color color = Color(255, 0, 0));
 	SquareShape(Rect rect , Color color = Color(255, 0, 0));
 	virtual ~SquareShape(void);
-
+	
+	void adjustPoints();
 	void setRect(Rect rect);
+	Rect getRect();
 
 private:
 	virtual void Draw();
 	Point a,b,c,d;
+	Rect rect;
 
 };
 #endif /*Fim da classe de desenho de formas */
