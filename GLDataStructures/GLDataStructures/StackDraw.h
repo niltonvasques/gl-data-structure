@@ -9,7 +9,9 @@
 class StackDraw{
 #define DEFAULT_BLOCK_WIDTH  20	
 #define	DEFAULT_BLOCK_HEIGHT 10
-
+	enum {
+		PUSH,POP
+	}typedef MODE;
 public:
 	StackDraw();
 	StackDraw(GLuint blockWidth_, GLuint blockHeight_);
@@ -24,6 +26,10 @@ private:
 	Stack<GLuint> stack;
 	GLuint blockWidth;
 	GLuint blockHeight;
+	GLuint originalBlockWidth;
+	GLuint originalBlockHeight;
 	void resizeBlocksStack();
+	void calcBetterBlockSize(Rect rect,MODE m);
+
 };
 #endif
