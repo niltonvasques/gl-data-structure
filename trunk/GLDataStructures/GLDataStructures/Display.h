@@ -16,6 +16,8 @@
 #include "Shape.h"
 #include "color.h"
 
+#define QUADRANT_SIZE 100.0f
+
 class CDisplay {
 public:
 
