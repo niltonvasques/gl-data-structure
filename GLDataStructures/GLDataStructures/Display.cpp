@@ -47,7 +47,7 @@ CDisplay::CDisplay(){
 CDisplay::~CDisplay(){
 }
 
-#define QUADRANT_SIZE 100.0f
+
 void CDisplay::resizeWindow(GLsizei w, GLsizei h){
 	// Evita a divisao por zero
 	if(h == 0) h = 1;

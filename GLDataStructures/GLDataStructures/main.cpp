@@ -12,7 +12,7 @@ using namespace std;
 void keyboardListener(unsigned char key, int x, int y);
 void deleteShapesDisplay();
 
-StackDraw stackDraw(20,10);
+StackDraw stackDraw(30,20);
 
 int main(int argc, const char* argv[]){
 	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
