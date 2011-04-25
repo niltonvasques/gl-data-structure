@@ -218,6 +218,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Structures"
+				>
+			</Filter>
+			<Filter
+				Name="StructuresDraw"
+				>
+				<File
+					RelativePath=".\StackDraw.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -293,6 +305,22 @@
 				</File>
 				<File
 					RelativePath=".\utils.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Structures"
+				>
+				<File
+					RelativePath=".\stack.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="StructuresDraw"
+				>
+				<File
+					RelativePath=".\StackDraw.h"
 					>
 				</File>
 			</Filter>

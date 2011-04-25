@@ -5,8 +5,8 @@ SquareShape::SquareShape(Point x_,unsigned int width, unsigned int height, Color
 	setRect(Rect(x_.x,x_.y,width,height));
 }
 
-SquareShape::SquareShape(Rect rect , Color color) : Shape(color){
-	setRect(rect);
+SquareShape::SquareShape(Rect rect_ , Color color) : Shape(color){
+	setRect(rect_);
 }
 
 
@@ -14,7 +14,12 @@ SquareShape::~SquareShape(){
 
 }
 
-void SquareShape::setRect(Rect rect){
+void SquareShape::setRect(Rect rect_){
+	this->rect = rect_;
+	adjustPoints();
+}
+
+void SquareShape::adjustPoints(){
 	this->a.x = rect.x;
 	this->a.y = rect.y + rect.height;
 	this->b.x = rect.x;
@@ -23,6 +28,10 @@ void SquareShape::setRect(Rect rect){
 	this->c.y = rect.y;
 	this->d.x = rect.x + rect.width;
 	this->d.y = rect.y + rect.height;
+}
+
+Rect SquareShape::getRect(){
+	return this->rect;
 }
 
 void SquareShape::Draw(){

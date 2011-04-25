@@ -1,3 +1,14 @@
+/*-----------------------------------------------------------------------------
+  Universidade Católica do Salvador - UCSAL
+  Disciplina - Organização de Arquivos
+  Aluno - Nilton Vasques Carvalho Junior
+  Autor: Nilton Vasques
+  Data do ínicio da implementação: 18/04/2011
+  Data da última modificação: 19/04/2011
+
+  Implementação da forma geométrica triângulo em OPENGL usando Orientação Objetos
+  para encapsular as rotinas da biblioteca.
+-----------------------------------------------------------------------------*/
 #include "CircleShape.h"
 #include <GL/glut.h>
 #include <math.h>

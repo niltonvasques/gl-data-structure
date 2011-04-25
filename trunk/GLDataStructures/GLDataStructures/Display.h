@@ -1,5 +1,3 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
 /*-----------------------------------------------------------------------------
   Universidade Católica do Salvador - UCSAL
   Disciplina - Organização de Arquivos
@@ -11,6 +9,8 @@
   Implementação da classe Display que é responsavel por desenhar na tela.
   A mesma recebe por parametro um objeto do tipo Shape.
 -----------------------------------------------------------------------------*/
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
 #include <map>
 #include "Shape.h"
