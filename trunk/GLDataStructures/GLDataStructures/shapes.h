@@ -17,5 +17,6 @@
 #include "TestShape.h"
 #include "LineShape.h"
 #include "PointShape.h"
+#include "StringShape.h"
 
 #endif

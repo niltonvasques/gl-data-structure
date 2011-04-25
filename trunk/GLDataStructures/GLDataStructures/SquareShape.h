@@ -27,12 +27,13 @@ public:
 	SquareShape(Rect rect , Color color = Color(255, 0, 0));
 	virtual ~SquareShape(void);
 	
+	virtual void Draw();
+
 	void adjustPoints();
 	void setRect(Rect rect);
 	Rect getRect();
 
 private:
-	virtual void Draw();
 	Point a,b,c,d;
 	Rect rect;
 

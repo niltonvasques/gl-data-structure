@@ -1,17 +1,20 @@
 #include "StackDraw.h"
 
-StackDraw::StackDraw(){
+StackDraw::StackDraw() : Shape(Color(255,0,0)){
 	this->blockWidth = DEFAULT_BLOCK_WIDTH;
 	this->blockHeight = DEFAULT_BLOCK_HEIGHT;
 	this->originalBlockWidth = this->blockWidth;
 	this->originalBlockHeight = this->blockHeight;
+	this->xPosition = 0;
 }
 
-StackDraw::StackDraw(GLuint blockWidth_, GLuint blockHeight_) {
+
+StackDraw::StackDraw(GLint xPosition_,GLuint blockWidth_, GLuint blockHeight_,Color color_) :Shape(color_) {
 	this->blockWidth = blockWidth_;
 	this->blockHeight = blockHeight_;
 	this->originalBlockWidth = this->blockWidth;
 	this->originalBlockHeight = this->blockHeight;
+	this->xPosition = xPosition_;
 }
 
 //StackDraw::StackDraw(Stack<GLuint> *stack_){
@@ -21,7 +24,7 @@ StackDraw::StackDraw(GLuint blockWidth_, GLuint blockHeight_) {
 StackDraw::~StackDraw(){
 	GLuint x;
 	while(!squareStack.isEmpty()){
-		delete(CDisplay::getInstance()->removeShapeN(pop(x)));
+		delete(pop(x));
 	}
 }
 
@@ -31,22 +34,29 @@ int StackDraw::push(GLuint content_){
 	SquareShape *squareContent = NULL;
 	SquareShape *pick = NULL;
 	this->squareStack.pick(pick);
+	char *str = (char*) malloc(sizeof(char)*10);
+	itoa(content_,str,10);
 	if(pick == NULL){
-		squareContent = new SquareShape(Rect(0,-99,this->blockWidth,this->blockHeight));
+		squareContent = new SquareShape(Rect(this->xPosition,-99,this->blockWidth,this->blockHeight),this->color);
+		StringShape *strShape = new StringShape(str,Color(0,0,0),Point(this->xPosition+2,-99+blockHeight/2));
+		this-stringStack.push(strShape);
 		this->squareStack.push(squareContent);
 	}else{
 		Rect rect = pick->getRect();
-		squareContent = new SquareShape(Rect(rect.x,rect.y+rect.height+1,this->blockWidth,this->blockHeight));
+		squareContent = new SquareShape(Rect(rect.x,rect.y+rect.height+1,this->blockWidth,this->blockHeight),this->color);
+		StringShape *strShape = new StringShape(str,Color(0,0,0),Point(rect.x+2,rect.y+rect.height+rect.height/2));
+		this-stringStack.push(strShape);
 		this->squareStack.push(squareContent);
 		calcBetterBlockSize(rect,PUSH);
 	}
-	CDisplay::getInstance()->addShape(squareContent);
-	CDisplay::getInstance()->redraw();
 	return 1;
 }
 
 SquareShape *StackDraw::pop(GLuint &value){
 	this->stack.pop(value);
+	StringShape *strShape = NULL;
+	this->stringStack.pop(strShape);
+	delete(strShape);
 	SquareShape *square = NULL;
 	this->squareStack.pop(square);
 	SquareShape *pick = NULL;
@@ -54,7 +64,6 @@ SquareShape *StackDraw::pop(GLuint &value){
 	if(pick != NULL){
 		calcBetterBlockSize(pick->getRect(),POP);
 	}
-	CDisplay::getInstance()->redraw();
 	return square;
 }
 
@@ -96,26 +105,61 @@ void StackDraw::calcBetterBlockSize(Rect rectTopStack,MODE m){
 	
 
 void StackDraw::resizeBlocksStack(){
-	printf("blockWidth %d blockHeight %d\n",blockWidth,blockHeight);
 	Stack<SquareShape*> stackSqr;
+	Stack<StringShape*> strStack;
 	while(!this->squareStack.isEmpty()){
 		SquareShape *sqr = NULL;
 		this->squareStack.pop(sqr);
 		stackSqr.push(sqr);
+
+		StringShape *str = NULL;
+		this->stringStack.pop(str);
+		strStack.push(str);
 	}
 	bool isFirst = true;
 	while(!stackSqr.isEmpty()){
 		SquareShape *sqr = NULL;
 		stackSqr.pop(sqr);
-
 		SquareShape *pick = NULL;
 		squareStack.pick(pick);
+
+		StringShape *str = NULL;
+		strStack.pop(str);
+		this->stringStack.push(str);
 		if(pick == NULL){
-			sqr->setRect(Rect(0,-99,this->blockWidth,this->blockHeight));
+			sqr->setRect(Rect(this->xPosition,-99,this->blockWidth,this->blockHeight));
+			str->setPoint(Point(this->xPosition+2,-99+blockHeight/2));
 		}else{
 			Rect rect = pick->getRect();		
 			sqr->setRect(Rect(rect.x,rect.y+rect.height+1,this->blockWidth,this->blockHeight));
+			str->setPoint(Point(rect.x+2,rect.y+rect.height+rect.height/2));
 		}
 		this->squareStack.push(sqr);
+	}
+}
+
+void StackDraw::Draw(){
+	Stack<SquareShape*> stackSqr;
+	Stack<StringShape*> strStack;
+ 	while(!this->squareStack.isEmpty()){
+		SquareShape *sqr = NULL;
+		this->squareStack.pop(sqr);
+		stackSqr.push(sqr);
+		
+		StringShape *str = NULL;
+		this->stringStack.pop(str);
+		strStack.push(str);
+	}
+	while(!stackSqr.isEmpty()){
+		SquareShape *sqr = NULL;
+		stackSqr.pop(sqr);
+		sqr->Draw();
+		this->squareStack.push(sqr);
+
+		StringShape *str = NULL;
+		strStack.pop(str);
+		str->Draw();
+		this->stringStack.push(str);
+
 	}
 }
