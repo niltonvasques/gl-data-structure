@@ -10,9 +10,11 @@
 class StackDraw : public Shape{
 #define DEFAULT_BLOCK_WIDTH  20	
 #define	DEFAULT_BLOCK_HEIGHT 10
-	enum {
-		PUSH,POP
-	}typedef MODE;
+#define RATIO_REDUCE_SIZE 8
+#define MIN_BLOCK_WIDTH 10
+enum {
+	PUSH,POP
+}typedef MODE;
 public:
 	StackDraw();
 	StackDraw(GLint xPosition_,GLuint blockWidth_, GLuint blockHeight_,Color color_);
