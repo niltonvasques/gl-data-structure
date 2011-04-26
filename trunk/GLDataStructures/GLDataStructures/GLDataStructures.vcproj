@@ -323,6 +323,10 @@
 					RelativePath=".\stack.h"
 					>
 				</File>
+				<File
+					RelativePath=".\stack.hpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="StructuresDraw"

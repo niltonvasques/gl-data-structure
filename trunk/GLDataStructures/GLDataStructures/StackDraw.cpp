@@ -10,7 +10,7 @@ StackDraw::StackDraw() : Shape(Color(255,0,0)){
 
 
 StackDraw::StackDraw(GLint xPosition_,GLuint blockWidth_, GLuint blockHeight_,Color color_) :Shape(color_) {
-	this->blockWidth = blockWidth_;
+	this->blockWidth = (blockWidth_ < MIN_BLOCK_WIDTH ? MIN_BLOCK_WIDTH : blockWidth_);
 	this->blockHeight = blockHeight_;
 	this->originalBlockWidth = this->blockWidth;
 	this->originalBlockHeight = this->blockHeight;
@@ -38,13 +38,13 @@ int StackDraw::push(GLuint content_){
 	itoa(content_,str,10);
 	if(pick == NULL){
 		squareContent = new SquareShape(Rect(this->xPosition,-99,this->blockWidth,this->blockHeight),this->color);
-		StringShape *strShape = new StringShape(str,Color(0,0,0),Point(this->xPosition+2,-99+blockHeight/2));
+		StringShape *strShape = new StringShape(str,Color(255,255,255),Point(this->xPosition+2,-99+blockHeight/2));
 		this-stringStack.push(strShape);
 		this->squareStack.push(squareContent);
 	}else{
 		Rect rect = pick->getRect();
 		squareContent = new SquareShape(Rect(rect.x,rect.y+rect.height+1,this->blockWidth,this->blockHeight),this->color);
-		StringShape *strShape = new StringShape(str,Color(0,0,0),Point(rect.x+2,rect.y+rect.height+rect.height/2));
+		StringShape *strShape = new StringShape(str,Color(255,255,255),Point(rect.x+2,rect.y+rect.height+rect.height/2));
 		this-stringStack.push(strShape);
 		this->squareStack.push(squareContent);
 		calcBetterBlockSize(rect,PUSH);
@@ -67,11 +67,9 @@ SquareShape *StackDraw::pop(GLuint &value){
 	return square;
 }
 
-#define RATIO_REDUCE_SIZE 8
 
 void StackDraw::calcBetterBlockSize(Rect rectTopStack,MODE m){
 	const GLfloat LIMIAR = ((GLfloat) originalBlockHeight / originalBlockWidth );
-	const GLuint MIN_BLOCK_WIDTH = 6;
 	const GLuint MIN_BLOCK_HEIGHT = (LIMIAR * (GLfloat) MIN_BLOCK_WIDTH) ; 
 	GLuint ratioHeight = ((GLfloat)blockHeight/RATIO_REDUCE_SIZE < 2 ? 2 : (GLfloat)blockHeight/RATIO_REDUCE_SIZE);
 	GLuint ratioWidth = ((GLfloat)blockWidth/RATIO_REDUCE_SIZE < 2 ? 2 : (GLfloat)blockWidth/RATIO_REDUCE_SIZE);
@@ -107,6 +105,7 @@ void StackDraw::calcBetterBlockSize(Rect rectTopStack,MODE m){
 void StackDraw::resizeBlocksStack(){
 	Stack<SquareShape*> stackSqr;
 	Stack<StringShape*> strStack;
+	printf("width %d height %d\n",this->blockWidth,this->blockHeight);
 	while(!this->squareStack.isEmpty()){
 		SquareShape *sqr = NULL;
 		this->squareStack.pop(sqr);
