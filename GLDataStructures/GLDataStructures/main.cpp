@@ -1,91 +1,62 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <conio.h>
 #include <time.h>
-#include <GL/glut.h>
-#include "utils.h"
-#include "Display.h"
-#include "shapes.h"
-#include "stack.h"
-#include "StackDraw.h"
+#include "main_control.h"
 
 using namespace std;
 
-void keyboardListener(unsigned char key, int x, int y);
-void deleteShapesDisplay();
-
-StackDraw *stackDraw;
-StackDraw *stackDraw2;
+void menu();
+void help();
 
 int main(int argc, const char* argv[]){
-	srand(time(NULL));
-	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
-	CDisplay::getInstance()->setKeyboardFuncCallback(keyboardListener);//Função que registra a função que será o callback das entradas de teclado
-	CDisplay::getInstance()->setBackgroundColor(Color(255,255,255));//Seta a cor de fund
-	stackDraw = new StackDraw(0,30,20,Color(0,0,255));
-	stackDraw2 = new StackDraw(-50,8,8,Color(0,255,0));
-	CDisplay::getInstance()->addShape(stackDraw);
-	CDisplay::getInstance()->addShape(stackDraw2);
-	CDisplay::getInstance()->run();//Inicia o main loop da gl...
-
-	delete(CDisplay::getInstance()->removeShapeN(stackDraw));
-	delete(CDisplay::getInstance()->removeShapeN(stackDraw2));
+	menu();
 	return 0;
 }
-void keyboardListener(unsigned char key, int x, int y){
-	Shape *shape = NULL;
-	switch(key){
-		case KEY_ESCAPE:
-			//TODO: Bug se os shapes estiverem na stack
-			//deleteShapesDisplay();
-			exit(0);
-			break;
-		case KEY_KEY_1:{
-			//Adição de um bloco na pilha STACK->PUSH
-			stackDraw->push(rand()%100);			
-			CDisplay::getInstance()->redraw();
-			/*delete(CDisplay::getInstance()->removeShapeN(stackDraw));*/
+
+
+void menu(){
+	printf(">>BEM VINDO AO PROGRAMA GL_DATA_STRUCTURES<<\n");
+	printf("\n");
+	printf("--    MENU    --\n\n\n");
+	printf("1 - Stacks (Pilhas)\n\n");
+	printf("2 - Queues (Filas)\n\n");
+	printf("3 - Ajuda \n\n");
+	printf("4 - Sair\n");
+	char ch;
+	do{
+		ch = _getch();
+		switch(ch){
+			case '1':
+				stackStartControl();
+				break;
+			case '2':
+				queueStartControl();
+				break;
+			case '3':
+				help();
+				break;
+			case '4':
+				exit(0);
+				break;
+			default:
+				break;
 		}
-			break;
-		case KEY_KEY_2:{
-			//Remoção de um bloco na pilha STACK->POP
-			GLuint value;
-			delete(stackDraw->pop(value));
-			CDisplay::getInstance()->redraw();
-			//deleteShapesDisplay();
-			break;
-		}
-		case KEY_KEY_3:{
-			//Adição de um bloco na pilha STACK->PUSH
-			stackDraw2->push(rand()%99);			
-			CDisplay::getInstance()->redraw();
-			/*delete(CDisplay::getInstance()->removeShapeN(stackDraw));*/
-		}
-			break;
-		case KEY_KEY_4:{
-			//Remoção de um bloco na pilha STACK->POP
-			GLuint value;
-			delete(stackDraw2->pop(value));
-			CDisplay::getInstance()->redraw();
-			//deleteShapesDisplay();
-			break;
-		}
-		case KEY_KEY_5:
-			//Pintando o background
-			CDisplay::getInstance()->setBackgroundColor(Color(255,255,0));
-			CDisplay::getInstance()->redraw();
-			break;
-		case 'a':
-			CDisplay::getInstance()->enableAntiAlias();
-			break;
-	}
+	}while(ch != '4' && ch != '3' && ch != '2' && ch != '1');
+
+
 }
 
-void deleteShapesDisplay(){
-	std::map<Shape*,Shape*> shapes = CDisplay::getInstance()->removeAllShapesN();
-	int i = 0;
-	for(std::map<Shape*,Shape*>::iterator it = shapes.begin(); it != shapes.end() ; it++ ,i++){
-		printf("deletandooo....%d\n",i);
-		if(it->second) delete(it->second);
-	}
-	CDisplay::getInstance()->redraw();
+void help(){
+#if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
+	system("CLS");
+#endif
+	printf("------- AJUDA --------\n\n");
+	printf(" Para inserir um novo elemento na estrutura pressione ( 1 ) \n");
+	printf(" Para remover um elemento da estrutura pressione ( 2 ) \n");
+	printf(" Para encerrar a simulacao pressione ( ESC ) \n");
+	_getch();
+#if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
+	system("CLS");
+#endif
+	menu();
 }
