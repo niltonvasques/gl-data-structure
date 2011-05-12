@@ -81,14 +81,3 @@ template <class Type>
 bool Stack<Type>::isEmpty(){
 	return (this->stackPtr == NULL);
 }
-	//Exemplo de usa da pilha
-	//Stack<int> *t = new Stack<int>();
-	//for(int i = 0; i < 100; i++){
-	//	t->push(i);
-	//}	
-
-	//for(int i = 0; i < 100; i++){
-	//	t->pop(argc);
-	//	printf("%d\n",argc);
-	//}
-	//delete(t);
