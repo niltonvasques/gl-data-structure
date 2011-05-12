@@ -38,14 +38,14 @@ int StackDraw::push(GLuint content_){
 	itoa(content_,str,10);
 	if(pick == NULL){
 		squareContent = new SquareShape(Rect(this->xPosition,-99,this->blockWidth,this->blockHeight),this->color);
-		StringShape *strShape = new StringShape(str,Color(255,255,255),Point(this->xPosition+2,-99+blockHeight/2));
-		this-stringStack.push(strShape);
+		StringShape *strShape = new StringShape(str,Color(255,255,255),Point(this->xPosition+2,-99+blockHeight/2),4);
+		this->stringStack.push(strShape);
 		this->squareStack.push(squareContent);
 	}else{
 		Rect rect = pick->getRect();
 		squareContent = new SquareShape(Rect(rect.x,rect.y+rect.height+1,this->blockWidth,this->blockHeight),this->color);
-		StringShape *strShape = new StringShape(str,Color(255,255,255),Point(rect.x+2,rect.y+rect.height+rect.height/2));
-		this-stringStack.push(strShape);
+		StringShape *strShape = new StringShape(str,Color(255,255,255),Point(rect.x+2,rect.y+rect.height+rect.height/2),4);
+		this->stringStack.push(strShape);
 		this->squareStack.push(squareContent);
 		calcBetterBlockSize(rect,PUSH);
 	}
