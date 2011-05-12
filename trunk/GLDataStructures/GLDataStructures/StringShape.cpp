@@ -34,7 +34,7 @@ void StringShape::Draw(){
 
 	glPushMatrix();	
 	glTranslatef(xyStart.x,xyStart.y,0);
-	printf("fontSize %f\n",fontSizeFloat);
+
 	glScalef(fontSizeFloat, fontSizeFloat, fontSizeFloat); // diminui o tamanho do fonte
 	//glRotatef(45, 0,0,1); // rotaciona o texto
 	glLineWidth(1); // define a espessura da linha

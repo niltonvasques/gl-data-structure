@@ -1,4 +1,8 @@
 #include "StackDraw.h"
+#include "FadeAnimation.h"
+#include "tinythread.h"
+
+using namespace tthread;
 
 StackDraw::StackDraw() : Shape(Color(255,0,0)){
 	this->blockWidth = DEFAULT_BLOCK_WIDTH;
@@ -52,6 +56,10 @@ int StackDraw::push(GLuint content_){
 	return 1;
 }
 
+void RunnableThread(void* square){
+	FadeAnimation(((SquareShape*)square)).start();
+}
+
 SquareShape *StackDraw::pop(GLuint &value){
 	this->stack.pop(value);
 	StringShape *strShape = NULL;
@@ -59,6 +67,11 @@ SquareShape *StackDraw::pop(GLuint &value){
 	delete(strShape);
 	SquareShape *square = NULL;
 	this->squareStack.pop(square);
+	if(square != NULL){
+		//thread t(RunnableThread,square);
+		//t.join();
+		FadeAnimation(square).start();
+	}
 	SquareShape *pick = NULL;
 	this->squareStack.pick(pick);
 	if(pick != NULL){
@@ -105,7 +118,7 @@ void StackDraw::calcBetterBlockSize(Rect rectTopStack,MODE m){
 void StackDraw::resizeBlocksStack(){
 	Stack<SquareShape*> stackSqr;
 	Stack<StringShape*> strStack;
-	printf("width %d height %d\n",this->blockWidth,this->blockHeight);
+	//printf("width %d height %d\n",this->blockWidth,this->blockHeight);
 	while(!this->squareStack.isEmpty()){
 		SquareShape *sqr = NULL;
 		this->squareStack.pop(sqr);

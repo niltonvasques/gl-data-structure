@@ -221,6 +221,10 @@
 					RelativePath=".\time_utils.c"
 					>
 				</File>
+				<File
+					RelativePath=".\tinythread.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Structures"
@@ -243,6 +247,14 @@
 				>
 				<File
 					RelativePath=".\main_control.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Animation"
+				>
+				<File
+					RelativePath=".\FadeAnimation.cpp"
 					>
 				</File>
 			</Filter>
@@ -308,6 +320,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\fast_mutex.h"
+					>
+				</File>
+				<File
 					RelativePath=".\keycodes.h"
 					>
 				</File>
@@ -321,6 +337,10 @@
 				</File>
 				<File
 					RelativePath=".\time_utils.h"
+					>
+				</File>
+				<File
+					RelativePath=".\tinythread.h"
 					>
 				</File>
 				<File
@@ -365,6 +385,18 @@
 				>
 				<File
 					RelativePath=".\main_control.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Animation"
+				>
+				<File
+					RelativePath=".\Animation.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FadeAnimation.h"
 					>
 				</File>
 			</Filter>
