@@ -11,36 +11,31 @@ void keyboardListenerStack(unsigned char key, int x, int y);
 void keyboardListenerQueue(unsigned char key, int x, int y);
 void deleteShapesDisplay();
 
+void initGlut(){
+	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
+	CDisplay::getInstance()->setBackgroundColor(Color(255,255,255));//Seta a cor de fund
+	CDisplay::getInstance()->run();//Inicia o main loop da gl...
+}
+
 void stackStartControl(){	
 	srand(time(NULL));
-	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
-	CDisplay::getInstance()->setKeyboardFuncCallback(keyboardListenerStack);//Função que registra a função que será o callback das entradas de teclado
-	CDisplay::getInstance()->setBackgroundColor(Color(255,255,255));//Seta a cor de fund
 	stackDraw = new StackDraw(0,40,40,Color(0,0,255));
-	
 	CDisplay::getInstance()->addShape(stackDraw);
-
 	StringShape *string = new StringShape("...Stacks...",Color(0,0,0),Point(-60,75),20);
 	string->setAntiAlias(true);
 	CDisplay::getInstance()->addShape(string);
 	CDisplay::getInstance()->addShape(new StringShape("...Stacks...",Color(255,255,255),Point(-60,75),20));
-	CDisplay::getInstance()->run();//Inicia o main loop da gl...
+	CDisplay::getInstance()->setKeyboardFuncCallback(keyboardListenerStack);//Função que registra a função que será o callback das entradas de teclado
 }
-//
 
 void queueStartControl(){
-	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
-	CDisplay::getInstance()->setKeyboardFuncCallback(keyboardListenerQueue);//Função que registra a função que será o callback das entradas de teclado
-	CDisplay::getInstance()->setBackgroundColor(Color(255,255,255));//Seta a cor de fund
 	queueDraw = new QueueDraw(Color());
-
 	StringShape *string = new StringShape("...Queues...",Color(0,0,0),Point(-60,75),20);
 	string->setAntiAlias(true);
 	CDisplay::getInstance()->addShape(string);
 	CDisplay::getInstance()->addShape(new StringShape("...Queues...",Color(255,255,255),Point(-60,75),20));
-
 	CDisplay::getInstance()->addShape(queueDraw);
-	CDisplay::getInstance()->run();//Inicia o main loop da gl...	
+	CDisplay::getInstance()->setKeyboardFuncCallback(keyboardListenerQueue);//Função que registra a função que será o callback das entradas de teclado
 }
 
 void keyboardListenerStack(unsigned char key, int x, int y){
@@ -51,27 +46,17 @@ void keyboardListenerStack(unsigned char key, int x, int y){
 			exit(0);
 			break;
 		case KEY_KEY_1:{
-			//Adição de um bloco na pilha STACK->PUSH
 			stackDraw->push(rand()%100);		
-			CDisplay::getInstance()->redraw();
-			/*delete(CDisplay::getInstance()->removeShapeN(stackDraw));*/
 		}
 			break;
 		case KEY_KEY_2:{
-			//Remoção de um bloco na pilha STACK->POP
 			GLuint value;
 			delete(stackDraw->pop(value));
-			CDisplay::getInstance()->redraw();
-			//deleteShapesDisplay();
 			break;
 		}
-		case KEY_KEY_5:
-			//Pintando o background
-			CDisplay::getInstance()->setBackgroundColor(Color(255,255,0));
-			CDisplay::getInstance()->redraw();
-			break;
-		case 'a':
-			CDisplay::getInstance()->enableAntiAlias();
+		case KEY_TAB:
+			deleteShapesDisplay();
+			queueStartControl();
 			break;
 	}
 }
@@ -85,15 +70,17 @@ void keyboardListenerQueue(unsigned char key, int x, int y){
 			break;
 		case KEY_KEY_1:{
 			queueDraw->insert(rand()%100);
-			CDisplay::getInstance()->redraw();
 		}
 			break;
 		case KEY_KEY_2:{
 			GLint value;
 			queueDraw->remove(value);
-			CDisplay::getInstance()->redraw();
 			break;
 		}
+	   	case KEY_TAB:
+			deleteShapesDisplay();
+			stackStartControl();
+			break;
 	}
 }
 
@@ -104,5 +91,4 @@ void deleteShapesDisplay(){
 		printf("deletandooo....%d\n",i);
 		if(it->second) delete(it->second);
 	}
-	CDisplay::getInstance()->redraw();
 }
