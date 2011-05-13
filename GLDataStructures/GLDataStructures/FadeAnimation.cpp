@@ -3,23 +3,24 @@
 
 FadeAnimation::FadeAnimation(SquareShape *square_){
 	this->square = square_;
+	printf("FadeAnimation(SquareShape *square_) rectWidth %d\n",square->getRect().width);
+	//CDisplay::getInstance()->addShape(square);
 }
 
 FadeAnimation::~FadeAnimation(){
-
+	//delete(CDisplay::getInstance()->removeShapeN(square));
 }
 
 //Repensar como vai ficar o animation e implementar o ticketCount...
-void FadeAnimation::start(){
-		Rect rect = square->getRect();
-		CDisplay::getInstance()->addShape(square);
-		for(int i = 0; rect.width > 0; i++,sleep(30)){
-			square->setRect(Rect(rect.x+1,rect.y,rect.width-2,rect.height-2));
-			//CDisplay::getInstance()->redraw();
-			rect = square->getRect();
-			printf("rect width %d\n",rect.width);
+int FadeAnimation::update(){
+		Rect rect = square->getRect();		
+		printf("update() rectWidth %d\n",rect.width);
+		if(rect.width > 0){
+			//square->setRect(Rect(rect.x+1,rect.y,rect.width-2,rect.height-2));		
+			//square->Draw();
+			return 1;
 		}
-		CDisplay::getInstance()->removeShapeN(square);
+		return 0;
 }
 
 void FadeAnimation::stop(){
