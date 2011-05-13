@@ -51,7 +51,7 @@ void keyboardListenerStack(unsigned char key, int x, int y){
 			break;
 		case KEY_KEY_2:{
 			GLuint value;
-			delete(stackDraw->pop(value));
+			stackDraw->pop(value);
 			break;
 		}
 		case KEY_TAB:

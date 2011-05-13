@@ -15,6 +15,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <list>
 #include "Shape.h"
 #include "color.h"
 #include "Animation.h"
@@ -45,7 +46,7 @@ private:
 	CDisplay();
 	~CDisplay();
 	
-	void configureTick(GLubyte frame);
+	static void configureTick(GLint frame);
 	static void renderFrame();
 	static void updateAnimation();
 	static void resizeWindow(GLsizei w, GLsizei h);
@@ -54,7 +55,9 @@ private:
 	static CDisplay *instance;
 	std::map<Shape*, Shape*> shapes;
 	Animation *animation;
-	//std::list<Animation*> animations;
+	std::list<Animation*> listAnimations;
+	
+	int teste;
 };
 
 #endif

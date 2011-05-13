@@ -39,22 +39,30 @@ void CDisplay::renderFrame(){
 }
 
 void CDisplay::updateAnimation(){
-	if(CDisplay::getInstance()->animation != NULL){
-		printf("updateAnimation %p \n ",CDisplay::getInstance()->animation);
-		int x = CDisplay::getInstance()->animation->update();
-		if(x==0) {
-			printf("updateAnimation x 0 \n");
-			delete(CDisplay::getInstance()->animation);
-			CDisplay::getInstance()->animation = NULL;
+	list<Animation*> *temp = &CDisplay::getInstance()->listAnimations;
+	list<Animation*>::iterator i;
+	list<Animation*> b;
+	
+
+	for(i=temp->begin(); i != temp->end(); i++){
+		int x = (*i)->update();
+		if(x == 0){
+			b.push_back(*i);
+			delete((*i));
 		}
 	}
+
+	for (i=b.begin(); i != b.end(); i++){
+		temp->remove(*i);
+	}
+
 	glutPostRedisplay();
 }
 
 void CDisplay::addAnimation(Animation *anim){
-	printf("add Anim %p ",anim);
-	CDisplay::getInstance()->animation = anim;
-	CDisplay::getInstance()->animation->update();
+	//if(CDisplay::getInstance()->animation != NULL) delete(CDisplay::getInstance()->animation);
+	//CDisplay::getInstance()->animation = anim;
+	listAnimations.push_front(anim);
 }
 
 CDisplay* CDisplay::getInstance(){
@@ -105,11 +113,10 @@ void CDisplay::initialize(){
 	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 	glutCreateWindow(WINDOW_TITLE);
 	glutDisplayFunc(renderFrame);
-	glutIdleFunc(updateAnimation);
 	glMatrixMode(GL_PROJECTION);
 	glutReshapeFunc(resizeWindow);
 	glutKeyboardFunc(CDisplay::keyBoardCallback);
-	configureTick(50);
+	configureTick(10);
 	//glutFullScreen();
 }
 
@@ -151,12 +158,11 @@ void CDisplay::enableAntiAlias(){
 		glEnable(GL_LINE_SMOOTH);
 }
 
-void CDisplay::configureTick(GLubyte frame) {
+void CDisplay::configureTick(GLint frame) {
 		//struct ntptimeval now;
   //      static long secs, usecs;
   //      long dif;
   //      int msecs = 20;
-
   //      /* throttle frame rate, ideally to 50 */
   //      ntp_gettime(&now);
   //      
@@ -170,5 +176,6 @@ void CDisplay::configureTick(GLubyte frame) {
   //      usecs = now.time.tv_usec;
   //      
   //      if (!Pause) drawScene();
-        //glutTimerFunc(msecs,tick,++frame)
+	updateAnimation();
+    glutTimerFunc(50,configureTick,0);
 }
