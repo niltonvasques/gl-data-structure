@@ -4,6 +4,8 @@
 extern "C"{
 #endif
 
+void initGlut();
+
 void stackStartControl();
 
 void queueStartControl();
