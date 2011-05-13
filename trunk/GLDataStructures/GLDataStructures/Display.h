@@ -12,9 +12,12 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include <iostream>
 #include <map>
+#include <vector>
 #include "Shape.h"
 #include "color.h"
+#include "Animation.h"
 
 #define QUADRANT_SIZE 100.0f
 
@@ -29,6 +32,7 @@ public:
 	void initialize();
 	void setKeyboardFuncCallback(void (__cdecl *func)(unsigned char, int, int));
 	void addShape(Shape* shape);
+	void addAnimation(Animation *anim);
 	Shape* removeShapeN(Shape* shape);
 	std::map<Shape*, Shape*> CDisplay::removeAllShapesN();
 	void setBackgroundColor(Color color);
@@ -43,12 +47,14 @@ private:
 	
 	void configureTick(GLubyte frame);
 	static void renderFrame();
+	static void updateAnimation();
 	static void resizeWindow(GLsizei w, GLsizei h);
 	static void keyBoardCallback(unsigned char, int, int);
 	static FUNC_CALLBACK mCallbackKey;
 	static CDisplay *instance;
 	std::map<Shape*, Shape*> shapes;
-
+	Animation *animation;
+	//std::list<Animation*> animations;
 };
 
 #endif

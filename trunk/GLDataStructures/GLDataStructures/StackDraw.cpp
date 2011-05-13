@@ -56,9 +56,6 @@ int StackDraw::push(GLuint content_){
 	return 1;
 }
 
-void RunnableThread(void* square){
-	FadeAnimation(((SquareShape*)square)).start();
-}
 
 SquareShape *StackDraw::pop(GLuint &value){
 	this->stack.pop(value);
@@ -68,9 +65,9 @@ SquareShape *StackDraw::pop(GLuint &value){
 	SquareShape *square = NULL;
 	this->squareStack.pop(square);
 	if(square != NULL){
-		//thread t(RunnableThread,square);
-		//t.join();
-		FadeAnimation(square).start();
+		FadeAnimation *anim = new FadeAnimation(square);
+		printf("rectWidth %d\n",square->getRect().width);
+		CDisplay::getInstance()->addAnimation(anim);
 	}
 	SquareShape *pick = NULL;
 	this->squareStack.pick(pick);

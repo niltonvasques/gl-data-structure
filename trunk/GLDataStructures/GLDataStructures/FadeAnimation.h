@@ -11,7 +11,7 @@ public:
 	FadeAnimation(SquareShape *square_);
 	virtual ~FadeAnimation();
 
-	virtual void start();
+	virtual int update();
 	virtual void stop();
 private:
 	SquareShape *square;

@@ -38,13 +38,32 @@ void CDisplay::renderFrame(){
 	glFlush();
 }
 
+void CDisplay::updateAnimation(){
+	if(CDisplay::getInstance()->animation != NULL){
+		printf("updateAnimation %p \n ",CDisplay::getInstance()->animation);
+		int x = CDisplay::getInstance()->animation->update();
+		if(x==0) {
+			printf("updateAnimation x 0 \n");
+			delete(CDisplay::getInstance()->animation);
+			CDisplay::getInstance()->animation = NULL;
+		}
+	}
+	glutPostRedisplay();
+}
+
+void CDisplay::addAnimation(Animation *anim){
+	printf("add Anim %p ",anim);
+	CDisplay::getInstance()->animation = anim;
+	CDisplay::getInstance()->animation->update();
+}
+
 CDisplay* CDisplay::getInstance(){
 	if (!instance) instance = new CDisplay();
 	return instance;
 }
 
 CDisplay::CDisplay(){
-	
+	animation = NULL;
 }
 
 CDisplay::~CDisplay(){
@@ -86,7 +105,7 @@ void CDisplay::initialize(){
 	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 	glutCreateWindow(WINDOW_TITLE);
 	glutDisplayFunc(renderFrame);
-	//glutIdleFunc(dispatchDraw);
+	glutIdleFunc(updateAnimation);
 	glMatrixMode(GL_PROJECTION);
 	glutReshapeFunc(resizeWindow);
 	glutKeyboardFunc(CDisplay::keyBoardCallback);
