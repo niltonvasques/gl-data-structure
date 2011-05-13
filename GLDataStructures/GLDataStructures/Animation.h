@@ -4,6 +4,10 @@
 class Animation{
 
 public:
+	virtual ~Animation(){
+
+	}
+
 	virtual int update() = 0;
 	virtual void stop() = 0;
 };

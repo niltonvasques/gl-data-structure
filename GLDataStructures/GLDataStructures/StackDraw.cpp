@@ -66,7 +66,6 @@ SquareShape *StackDraw::pop(GLuint &value){
 	this->squareStack.pop(square);
 	if(square != NULL){
 		FadeAnimation *anim = new FadeAnimation(square);
-		printf("rectWidth %d\n",square->getRect().width);
 		CDisplay::getInstance()->addAnimation(anim);
 	}
 	SquareShape *pick = NULL;
