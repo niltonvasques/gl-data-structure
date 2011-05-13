@@ -19,6 +19,9 @@
 #define QUADRANT_SIZE 100.0f
 
 class CDisplay {
+	struct funcCallback_{
+		void (__cdecl *func)(unsigned char, int, int);
+		}typedef FUNC_CALLBACK;
 public:
 
 	static CDisplay* getInstance();
@@ -29,19 +32,21 @@ public:
 	Shape* removeShapeN(Shape* shape);
 	std::map<Shape*, Shape*> CDisplay::removeAllShapesN();
 	void setBackgroundColor(Color color);
-	void redraw();
+	//void redraw();
 	void enableAntiAlias();
 	void run();
 
 private:
-
+	
 	CDisplay();
 	~CDisplay();
-
-	static void dispatchDraw();
+	
+	void configureTick(GLubyte frame);
+	static void renderFrame();
 	static void resizeWindow(GLsizei w, GLsizei h);
+	static void keyBoardCallback(unsigned char, int, int);
+	static FUNC_CALLBACK mCallbackKey;
 	static CDisplay *instance;
-
 	std::map<Shape*, Shape*> shapes;
 
 };

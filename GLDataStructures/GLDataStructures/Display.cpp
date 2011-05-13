@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/glut.h>
+#include <time.h>
 #include "Display.h"
 #include "Shape.h"
 
@@ -26,7 +27,8 @@
 using namespace std;
 
 CDisplay *CDisplay::instance = NULL;
-void CDisplay::dispatchDraw(){
+CDisplay::FUNC_CALLBACK CDisplay::mCallbackKey;
+void CDisplay::renderFrame(){
 	int x = 0;
 	glClear(GL_COLOR_BUFFER_BIT);
 	std::map<Shape*, Shape*> shapes = CDisplay::getInstance()->shapes;
@@ -42,6 +44,7 @@ CDisplay* CDisplay::getInstance(){
 }
 
 CDisplay::CDisplay(){
+	
 }
 
 CDisplay::~CDisplay(){
@@ -69,18 +72,25 @@ void CDisplay::resizeWindow(GLsizei w, GLsizei h){
 	gluOrtho2D (left, right, bottom, top);
 }
 
-void CDisplay::setKeyboardFuncCallback(void (__cdecl *func)(unsigned char, int, int)){
-	glutKeyboardFunc(func);
+void CDisplay::setKeyboardFuncCallback(void (__cdecl *func_)(unsigned char, int, int)){
+	mCallbackKey.func = func_;
+}
+
+void CDisplay::keyBoardCallback(unsigned char key, int x, int y){
+	mCallbackKey.func(key,x,y);
+	glutPostRedisplay();
 }
 
 void CDisplay::initialize(){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 	glutCreateWindow(WINDOW_TITLE);
-	glutDisplayFunc(dispatchDraw);
+	glutDisplayFunc(renderFrame);
 	//glutIdleFunc(dispatchDraw);
 	glMatrixMode(GL_PROJECTION);
 	glutReshapeFunc(resizeWindow);
+	glutKeyboardFunc(CDisplay::keyBoardCallback);
+	configureTick(50);
 	//glutFullScreen();
 }
 
@@ -107,16 +117,39 @@ std::map<Shape*, Shape*> CDisplay::removeAllShapesN(){
 		ret[it->first] = it->second;
 	}
 	shapes.clear();
+	
 	return ret;
 }
 
-void CDisplay::redraw(){
-	CDisplay::dispatchDraw();
-}
+//void CDisplay::redraw(){
+//	CDisplay::renderFrame();
+//}
 
 void CDisplay::enableAntiAlias(){
 	if(glIsEnabled(GL_LINE_SMOOTH))
 		glDisable(GL_LINE_SMOOTH);
 	else
 		glEnable(GL_LINE_SMOOTH);
+}
+
+void CDisplay::configureTick(GLubyte frame) {
+		//struct ntptimeval now;
+  //      static long secs, usecs;
+  //      long dif;
+  //      int msecs = 20;
+
+  //      /* throttle frame rate, ideally to 50 */
+  //      ntp_gettime(&now);
+  //      
+  //      if (frame) {
+  //              if (now.time.tv_sec > secs) dif = 1000000-usecs+now.time.tv_usec;
+  //              else dif = now.time.tv_usec - usecs;
+  //              if (dif >= 20000) msecs = 0;
+  //              else msecs = (int)(20000 - dif)/1000;
+  //      }
+  //      secs = now.time.tv_sec;
+  //      usecs = now.time.tv_usec;
+  //      
+  //      if (!Pause) drawScene();
+        //glutTimerFunc(msecs,tick,++frame)
 }
