@@ -76,15 +76,11 @@ SquareShape *StackDraw::pop(GLuint &value){
 	SquareShape *square = NULL;
 	this->squareStack.pop(square);
 	if(square != NULL){
+		this->lastSquarePoped = square;
 		Animation *anim = new Animation(square);
 		CDisplay::getInstance()->addShape(square);
 		CDisplay::getInstance()->addAnimation(anim);
 		anim->setAnimationListener(this);
-	}
-	SquareShape *pick = NULL;
-	this->squareStack.pick(pick);
-	if(pick != NULL){
-		calcBetterBlockSize(pick->getRect(),POP);
 	}
 	return square;
 }
@@ -192,4 +188,11 @@ int StackDraw::animation(){
 void StackDraw::onAnimationFinish(Shape *shape){
 	delete(CDisplay::getInstance()->removeShapeN(shape));
 	printf("animation finish\n");
+	if(shape == lastSquarePoped){
+		SquareShape *pick = NULL;
+		this->squareStack.pick(pick);
+		if(pick != NULL){
+			calcBetterBlockSize(pick->getRect(),POP);
+		}
+	}
 }

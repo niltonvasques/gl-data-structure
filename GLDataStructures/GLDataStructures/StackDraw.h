@@ -51,6 +51,7 @@ private:
 	GLint xPosition;
 	void resizeBlocksStack();
 	void calcBetterBlockSize(Rect rect,MODE m);
+	SquareShape* lastSquarePoped;
 
 };
 #endif
