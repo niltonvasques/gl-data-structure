@@ -4,7 +4,7 @@
   Aluno - Nilton Vasques Carvalho Junior
   Autores: Nilton Vasques e Gustavo Neves
   Data do ínicio da implementação: 20/04/2011
-  Data da última modificação: 21/04/2011
+  Data da última modificação: 16/05/2011
 
   Implementação da classe Display que é responsavel por desenhar na tela.
   A mesma recebe por parametro um objeto do tipo Shape.

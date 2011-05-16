@@ -1,3 +1,14 @@
+/*-----------------------------------------------------------------------------
+  Universidade Católica do Salvador - UCSAL
+  Disciplina - Organização de Arquivos
+  Aluno - Nilton Vasques Carvalho Junior
+  Autor: Nilton Vasques
+  Data do ínicio da implementação: 20/04/2011
+  Data da última modificação: 16/05/2011
+
+  Implementação das representações gráfica das estruturas de dados para facilitar
+  a didática na aprendizagem das mesmas.
+-----------------------------------------------------------------------------*/
 #include <iostream>
 #include <conio.h>
 #include <time.h>
