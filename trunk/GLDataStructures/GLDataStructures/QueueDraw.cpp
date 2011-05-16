@@ -1,3 +1,14 @@
+/*-----------------------------------------------------------------------------
+  Universidade Católica do Salvador - UCSAL
+  Disciplina - Organização de Arquivos
+  Aluno - Nilton Vasques Carvalho Junior
+  Autor: Nilton Vasques
+  Data do ínicio da implementação: 10/05/2011
+  Data da última modificação: 16/05/2011
+
+  Implementação da classe QueueDraw que é responsavel representar graficamente
+  a estrutura de fila.
+-----------------------------------------------------------------------------*/
 #include "QueueDraw.h"
 #include "Animation.h"
 #include "Display.h"

@@ -221,14 +221,6 @@
 					RelativePath=".\time_utils.c"
 					>
 				</File>
-				<File
-					RelativePath=".\tinythread.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Structures"
-				>
 			</Filter>
 			<Filter
 				Name="StructuresDraw"
