@@ -22,8 +22,9 @@ public:
 		setColor(color_);
 	}
 	virtual void Draw() = 0;
-
+	virtual int animation() = 0;
 	void setColor(Color color_) { this->color = color_;};
+
 protected:
 	Color color;
 };

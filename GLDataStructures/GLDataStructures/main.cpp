@@ -56,6 +56,7 @@ void help(){
 	printf(" Para inserir um novo elemento na estrutura pressione ( 1 ). \n\n");
 	printf(" Para remover um elemento da estrutura pressione ( 2 ). \n\n");
 	printf(" Para alternar entre os tipos de estruturas pressione ( TAB ). \n\n");
+	printf(" Para pausar ou executar a exibição pressione a tecla ( P ). \n\n");
 	printf(" Para encerrar a simulacao pressione ( ESC ). \n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	printf(" Pressione qualquer tecla para voltar ao menu principal... \n\n");
 	_getch();

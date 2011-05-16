@@ -28,6 +28,7 @@ public:
 	virtual ~SquareShape(void);
 	
 	virtual void Draw();
+	virtual int animation();
 
 	void adjustPoints();
 	void setRect(Rect rect);

@@ -7,6 +7,7 @@
 StackDraw *stackDraw = NULL;
 QueueDraw *queueDraw = NULL;
 
+bool keyboardGenerics(unsigned char key, int x, int y);
 void keyboardListenerStack(unsigned char key, int x, int y);
 void keyboardListenerQueue(unsigned char key, int x, int y);
 void deleteShapesDisplay();
@@ -38,13 +39,26 @@ void queueStartControl(){
 	CDisplay::getInstance()->setKeyboardFuncCallback(keyboardListenerQueue);//Função que registra a função que será o callback das entradas de teclado
 }
 
-void keyboardListenerStack(unsigned char key, int x, int y){
-	Shape *shape = NULL;
+
+bool keyboardGenerics(unsigned char key, int x, int y){
 	switch(key){
+		case 'p':
+			CDisplay::getInstance()->setPause(!CDisplay::getInstance()->isPause());
+			return false;
 		case KEY_ESCAPE:
 			deleteShapesDisplay();
 			exit(0);
-			break;
+			return false;
+		default:
+			if(CDisplay::getInstance()->isPause()) return false;
+			return true;
+	}
+}
+
+void keyboardListenerStack(unsigned char key, int x, int y){
+	Shape *shape = NULL;
+	if(!keyboardGenerics(key,x,y)) return;
+	switch(key){
 		case KEY_KEY_1:{
 			stackDraw->push(rand()%100);		
 		}

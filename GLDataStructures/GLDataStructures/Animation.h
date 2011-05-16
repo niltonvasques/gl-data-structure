@@ -1,15 +1,30 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include "Shape.h"
+
+class AnimationListener{
+
+	public:
+		virtual void onAnimationFinish(Shape *shape) = 0;
+};
+
 class Animation{
 
 public:
-	virtual ~Animation(){
+	Animation(Shape *shape_);
 
-	}
+	~Animation();
 
-	virtual int update() = 0;
-	virtual void stop() = 0;
+	void setAnimationListener(AnimationListener *listener);
+
+	int update();
+
+	void stop();
+
+private:
+	Shape *shape;
+	AnimationListener *animListener;
 };
 
 #endif

@@ -6,8 +6,9 @@
 #include "SquareShape.h"
 #include "StringShape.h"
 #include "stack.h"
+#include "Animation.h"
 
-class StackDraw : public Shape{
+class StackDraw : public Shape, public AnimationListener{
 #define DEFAULT_BLOCK_WIDTH  20	
 #define	DEFAULT_BLOCK_HEIGHT 10
 #define RATIO_REDUCE_SIZE 8
@@ -22,6 +23,9 @@ public:
 	virtual ~StackDraw();
 	
 	virtual void Draw();
+	virtual int animation();
+	virtual void onAnimationFinish(Shape *shape);
+
 	int push(GLuint content_);
 	SquareShape *pop(GLuint &value);
 
