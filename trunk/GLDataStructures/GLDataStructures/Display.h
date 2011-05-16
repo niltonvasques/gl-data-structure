@@ -40,6 +40,8 @@ public:
 	//void redraw();
 	void enableAntiAlias();
 	void run();
+	void setPause(bool state);
+	bool isPause();
 
 private:
 	
@@ -56,8 +58,7 @@ private:
 	std::map<Shape*, Shape*> shapes;
 	Animation *animation;
 	std::list<Animation*> listAnimations;
-	
-	int teste;
+	bool pause;
 };
 
 #endif

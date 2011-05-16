@@ -254,7 +254,7 @@
 				Name="Animation"
 				>
 				<File
-					RelativePath=".\FadeAnimation.cpp"
+					RelativePath=".\Animation.cpp"
 					>
 				</File>
 			</Filter>
@@ -393,10 +393,6 @@
 				>
 				<File
 					RelativePath=".\Animation.h"
-					>
-				</File>
-				<File
-					RelativePath=".\FadeAnimation.h"
 					>
 				</File>
 			</Filter>

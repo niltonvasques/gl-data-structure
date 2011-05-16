@@ -12,6 +12,7 @@ public:
 	virtual ~StringShape();
 
 	virtual void Draw();
+	virtual int animation();
 
 	void setPoint(Point xyStart_);
 

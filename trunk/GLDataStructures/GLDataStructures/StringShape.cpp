@@ -59,4 +59,7 @@ void StringShape::Draw(){
 
 }
 
+int StringShape::animation(){
+	return 1;
+}
 

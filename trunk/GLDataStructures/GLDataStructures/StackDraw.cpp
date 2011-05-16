@@ -1,5 +1,5 @@
 #include "StackDraw.h"
-#include "FadeAnimation.h"
+#include "Animation.h"
 #include "tinythread.h"
 
 using namespace tthread;
@@ -65,8 +65,10 @@ SquareShape *StackDraw::pop(GLuint &value){
 	SquareShape *square = NULL;
 	this->squareStack.pop(square);
 	if(square != NULL){
-		FadeAnimation *anim = new FadeAnimation(square);
+		Animation *anim = new Animation(square);
+		CDisplay::getInstance()->addShape(square);
 		CDisplay::getInstance()->addAnimation(anim);
+		anim->setAnimationListener(this);
 	}
 	SquareShape *pick = NULL;
 	this->squareStack.pick(pick);
@@ -170,4 +172,13 @@ void StackDraw::Draw(){
 		this->stringStack.push(str);
 
 	}
+}
+
+int StackDraw::animation(){
+	return 0;
+}
+
+void StackDraw::onAnimationFinish(Shape *shape){
+	delete(CDisplay::getInstance()->removeShapeN(shape));
+	printf("animation finish\n");
 }

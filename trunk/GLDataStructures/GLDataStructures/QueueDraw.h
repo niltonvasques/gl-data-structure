@@ -4,6 +4,7 @@
 #include "queue.h"
 #include "Shape.h"
 #include "SquareShape.h"
+#include "Point.h"
 
 
 class QueueDraw : public Shape{
@@ -15,9 +16,13 @@ public:
 	virtual ~QueueDraw();
 
 	virtual void Draw();
-
+	virtual int animation();
+	
 	GLint insert(GLint value);
 	GLint remove(GLint &ref);
+
+	void setPointFirstBlock(Point x_);
+	Point getPointFirstBlock();
 
 private:
 	Queue<SquareShape*> shapesQueue;
@@ -27,7 +32,7 @@ private:
 	GLuint blockHeight;
 	GLuint originalBlockWidth;
 	GLuint originalBlockHeight;
-	GLint xPosition;
+	Point x;
 };
 
 #endif

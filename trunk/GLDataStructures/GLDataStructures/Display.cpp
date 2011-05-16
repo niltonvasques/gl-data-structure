@@ -29,6 +29,7 @@ using namespace std;
 CDisplay *CDisplay::instance = NULL;
 CDisplay::FUNC_CALLBACK CDisplay::mCallbackKey;
 void CDisplay::renderFrame(){
+	if(CDisplay::getInstance()->isPause()) return;		
 	int x = 0;
 	glClear(GL_COLOR_BUFFER_BIT);
 	std::map<Shape*, Shape*> shapes = CDisplay::getInstance()->shapes;
@@ -71,6 +72,7 @@ CDisplay* CDisplay::getInstance(){
 }
 
 CDisplay::CDisplay(){
+	pause = false;
 	animation = NULL;
 }
 
@@ -128,6 +130,14 @@ void CDisplay::run(){
 	glutMainLoop();
 }
 
+void CDisplay::setPause(bool state){
+	this->pause = state;
+}
+
+bool CDisplay::isPause(){
+	return this->pause;
+}
+
 void CDisplay::addShape(Shape* shape){
 	shapes[shape] = shape;
 }
@@ -176,6 +186,6 @@ void CDisplay::configureTick(GLint frame) {
   //      usecs = now.time.tv_usec;
   //      
   //      if (!Pause) drawScene();
-	updateAnimation();
+	if(!CDisplay::getInstance()->isPause()) updateAnimation();
     glutTimerFunc(50,configureTick,0);
 }

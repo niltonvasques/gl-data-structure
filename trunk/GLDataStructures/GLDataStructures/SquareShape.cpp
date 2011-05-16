@@ -45,3 +45,14 @@ void SquareShape::Draw(){
 	glEnd();
 
 }
+
+int SquareShape::animation(){
+	Rect rect = getRect();	
+	printf("square animation\n");
+	if(rect.width > 0){
+		setRect(Rect(rect.x+1,rect.y,rect.width-2,rect.height-2));		
+		Draw();
+		return 1;
+	}
+	return 0;
+}
