@@ -30,7 +30,7 @@ void stackStartControl(){
 }
 
 void queueStartControl(){
-	queueDraw = new QueueDraw(Color());
+	queueDraw = new QueueDraw(Color(255,0,0));
 	StringShape *string = new StringShape("...Queues...",Color(0,0,0),Point(-60,75),20);
 	string->setAntiAlias(true);
 	CDisplay::getInstance()->addShape(string);
