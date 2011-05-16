@@ -148,11 +148,19 @@ Shape* CDisplay::removeShapeN(Shape* shape){
 }
 
 std::map<Shape*, Shape*> CDisplay::removeAllShapesN(){
+	list<Animation*> *temp = &CDisplay::getInstance()->listAnimations;
+	list<Animation*>::iterator i;
+	for(i=temp->begin(); i != temp->end(); i++){
+		delete((*i));		
+	}
+	this->listAnimations.clear();
+
 	std::map<Shape*, Shape*> ret;
 	for (map<Shape*, Shape*>::iterator it = shapes.begin(); it != shapes.end(); it++){
 		ret[it->first] = it->second;
 	}
 	shapes.clear();
+
 	
 	return ret;
 }
