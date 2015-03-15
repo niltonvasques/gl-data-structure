@@ -12,8 +12,8 @@ void keyboardListenerStack(unsigned char key, int x, int y);
 void keyboardListenerQueue(unsigned char key, int x, int y);
 void deleteShapesDisplay();
 
-void initGlut(){
-	CDisplay::getInstance()->initialize(); //função que chamas as funções de inicializaçao da glut e desenha a janela.
+void initGlut(int argc, char** argv){
+	CDisplay::getInstance()->initialize(argc, argv); //função que chamas as funções de inicializaçao da glut e desenha a janela.
 	CDisplay::getInstance()->setBackgroundColor(Color(255,255,255));//Seta a cor de fund
 	CDisplay::getInstance()->run();//Inicia o main loop da gl...
 }

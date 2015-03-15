@@ -24,18 +24,18 @@
 
 class CDisplay {
 	struct funcCallback_{
-		void (__cdecl *func)(unsigned char, int, int);
+		void (*func)(unsigned char, int, int);
 		}typedef FUNC_CALLBACK;
 public:
 
 	static CDisplay* getInstance();
 
-	void initialize();
-	void setKeyboardFuncCallback(void (__cdecl *func)(unsigned char, int, int));
+	void initialize(int argc, char** argv);
+	void setKeyboardFuncCallback(void (*func)(unsigned char, int, int));
 	void addShape(Shape* shape);
 	void addAnimation(Animation *anim);
 	Shape* removeShapeN(Shape* shape);
-	std::map<Shape*, Shape*> CDisplay::removeAllShapesN();
+	std::map<Shape*, Shape*> removeAllShapesN();
 	void setBackgroundColor(Color color);
 	//void redraw();
 	void enableAntiAlias();

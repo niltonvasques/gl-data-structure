@@ -16,7 +16,7 @@
 #include <GL/glut.h>
 #include "SquareShape.h"
 #include "StringShape.h"
-#include "stack.h"
+#include "Stack.h"
 #include "Animation.h"
 
 class StackDraw : public Shape, public AnimationListener{

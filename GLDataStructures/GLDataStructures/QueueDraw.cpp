@@ -12,7 +12,6 @@
 #include "QueueDraw.h"
 #include "Animation.h"
 #include "Display.h"
-#include <conio.h>
 
 QueueDraw::QueueDraw(Color color_): Shape(color_){
 	this->blockWidth = DEFAULT_BLOCK_WIDTH;

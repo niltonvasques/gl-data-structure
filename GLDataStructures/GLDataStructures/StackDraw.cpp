@@ -9,6 +9,8 @@
   Implementação da classe StackDraw que é responsavel representar graficamente
   a estrutura de pilha.
 -----------------------------------------------------------------------------*/
+#include <stdlib.h>
+#include <stdio.h>
 #include "StackDraw.h"
 #include "Animation.h"
 #include "tinythread.h"
@@ -50,7 +52,7 @@ int StackDraw::push(GLuint content_){
 	SquareShape *pick = NULL;
 	this->squareStack.pick(pick);
 	char *str = (char*) malloc(sizeof(char)*10);
-	itoa(content_,str,10);
+        sprintf(str, "%d", content_);
 	if(pick == NULL){
 		squareContent = new SquareShape(Rect(this->xPosition,-99,this->blockWidth,this->blockHeight),this->color);
 		StringShape *strShape = new StringShape(str,Color(255,255,255),Point(this->xPosition+2,-99+blockHeight/2),4);

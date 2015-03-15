@@ -30,7 +30,6 @@ CDisplay *CDisplay::instance = NULL;
 CDisplay::FUNC_CALLBACK CDisplay::mCallbackKey;
 void CDisplay::renderFrame(){
 	if(CDisplay::getInstance()->isPause()) return;		
-	int x = 0;
 	glClear(GL_COLOR_BUFFER_BIT);
 	std::map<Shape*, Shape*> shapes = CDisplay::getInstance()->shapes;
 	for (map<Shape*, Shape*>::iterator it = shapes.begin(); it != shapes.end(); it++){
@@ -101,7 +100,7 @@ void CDisplay::resizeWindow(GLsizei w, GLsizei h){
 	gluOrtho2D (left, right, bottom, top);
 }
 
-void CDisplay::setKeyboardFuncCallback(void (__cdecl *func_)(unsigned char, int, int)){
+void CDisplay::setKeyboardFuncCallback(void (*func_)(unsigned char, int, int)){
 	mCallbackKey.func = func_;
 }
 
@@ -110,7 +109,8 @@ void CDisplay::keyBoardCallback(unsigned char key, int x, int y){
 	glutPostRedisplay();
 }
 
-void CDisplay::initialize(){
+void CDisplay::initialize(int argc, char** argv){
+        glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 	glutCreateWindow(WINDOW_TITLE);

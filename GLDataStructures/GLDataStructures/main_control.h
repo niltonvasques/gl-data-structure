@@ -4,7 +4,7 @@
 extern "C"{
 #endif
 
-void initGlut();
+void initGlut(int argc, char** argv);
 
 void stackStartControl();
 
