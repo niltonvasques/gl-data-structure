@@ -17,6 +17,6 @@ run:
 	./$(EXECUTABLE)
 
 clean: 
-	rm -rf $(OBJECTS) 
+	rm -rf $(OBJECTS) $(EXECUTABLE) *.swp
 
 
