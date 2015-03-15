@@ -1,0 +1,2 @@
+Implementação do modelo conceitual das estruturas de dados existentes em OpenGL. Este projeto visa quebrar a abstração existente na aprendizagem desses algoritmos, tornando assim  a sua assimilação mais simples.
+Este projeto é uma iniciativa do Professor Arnaldo Bispo da disciplina de Estrutura de Dados e Organização de arquivos e dos estudantes do curso de Informática da Universidade Católica do Salvador.
