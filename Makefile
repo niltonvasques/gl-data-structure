@@ -1,14 +1,14 @@
 CC=g++
 CFLAGS=-c -Wall
-LDFLAGS= -lGL -lGLU -lglut 
+LDFLAGS= -lGL -lGLU -lglut
 SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=hello
 
 all: $(SOURCES) $(EXECUTABLE)
-	
+
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
@@ -16,7 +16,7 @@ $(EXECUTABLE): $(OBJECTS)
 run:
 	./$(EXECUTABLE)
 
-clean: 
+clean:
 	rm -rf $(OBJECTS) $(EXECUTABLE) *.swp
 
 
